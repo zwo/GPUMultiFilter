@@ -7,8 +7,10 @@
 //
 
 #import "ViewController.h"
-
+#import <GPUImage/GPUImage.h>
+#import "FilterCircle.h"
 @interface ViewController ()
+@property (weak, nonatomic) IBOutlet GPUImageView *imageView;
 
 @end
 
@@ -16,7 +18,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    GPUImagePicture *picture = [[GPUImagePicture alloc] initWithImage:[UIImage imageNamed:@"3.jpg"]];
+    [picture addTarget:_imageView];
+    [picture processImage];
 }
 
 
@@ -25,5 +29,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)onButtonProcess:(id)sender {
+    FilterCircle *filter=[FilterCircle new];
+    GPUImagePicture *picture = [[GPUImagePicture alloc] initWithImage:[UIImage imageNamed:@"3.jpg"]];
+    [picture addTarget:filter];
+    [filter addTarget:_imageView];
+    [picture processImage];
+}
 
 @end
