@@ -16,6 +16,7 @@
 		C4C5006F1FF48DBD004DDC11 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C5006E1FF48DBD004DDC11 /* GPUImage.framework */; };
 		C4C500721FF49052004DDC11 /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C4C500711FF49052004DDC11 /* 3.jpg */; };
 		C4C500761FF49B45004DDC11 /* FilterCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C500751FF49B45004DDC11 /* FilterCircle.m */; };
+		C4C500791FF4C9D0004DDC11 /* FilterLine.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C500781FF4C9D0004DDC11 /* FilterLine.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,8 @@
 		C4C500711FF49052004DDC11 /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpg; sourceTree = "<group>"; };
 		C4C500741FF49B45004DDC11 /* FilterCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterCircle.h; sourceTree = "<group>"; };
 		C4C500751FF49B45004DDC11 /* FilterCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterCircle.m; sourceTree = "<group>"; };
+		C4C500771FF4C9D0004DDC11 /* FilterLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterLine.h; sourceTree = "<group>"; };
+		C4C500781FF4C9D0004DDC11 /* FilterLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterLine.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +98,8 @@
 			children = (
 				C4C500741FF49B45004DDC11 /* FilterCircle.h */,
 				C4C500751FF49B45004DDC11 /* FilterCircle.m */,
+				C4C500771FF4C9D0004DDC11 /* FilterLine.h */,
+				C4C500781FF4C9D0004DDC11 /* FilterLine.m */,
 			);
 			path = Filters;
 			sourceTree = "<group>";
@@ -173,6 +178,7 @@
 			files = (
 				C4C5005F1FF48BD7004DDC11 /* ViewController.m in Sources */,
 				C4C500761FF49B45004DDC11 /* FilterCircle.m in Sources */,
+				C4C500791FF4C9D0004DDC11 /* FilterLine.m in Sources */,
 				C4C5005C1FF48BD7004DDC11 /* AppDelegate.m in Sources */,
 				C4C500591FF48BD7004DDC11 /* main.m in Sources */,
 			);

@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import <GPUImage/GPUImage.h>
 #import "FilterCircle.h"
+#import "FilterLine.h"
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet GPUImageView *imageView;
 
@@ -31,9 +32,11 @@
 
 - (IBAction)onButtonProcess:(id)sender {
     FilterCircle *filter=[FilterCircle new];
+    FilterLine *filter2=[FilterLine new];
     GPUImagePicture *picture = [[GPUImagePicture alloc] initWithImage:[UIImage imageNamed:@"3.jpg"]];
     [picture addTarget:filter];
-    [filter addTarget:_imageView];
+    [filter addTarget:filter2];
+    [filter2 addTarget:_imageView];
     [picture processImage];
 }
 
