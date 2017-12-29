@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C4690A6A1FF645AE009E9600 /* alum.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C4690A631FF645AE009E9600 /* alum.jpg */; };
+		C4690A6B1FF645AE009E9600 /* alum2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C4690A641FF645AE009E9600 /* alum2.jpg */; };
+		C4690A6C1FF645AE009E9600 /* alum3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C4690A651FF645AE009E9600 /* alum3.jpg */; };
+		C4690A6D1FF645AE009E9600 /* grain.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C4690A661FF645AE009E9600 /* grain.jpg */; };
+		C4690A6E1FF645AE009E9600 /* grain2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C4690A671FF645AE009E9600 /* grain2.jpg */; };
+		C4690A6F1FF645AE009E9600 /* pinning.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C4690A681FF645AE009E9600 /* pinning.jpg */; };
+		C4690A701FF645AE009E9600 /* pinning2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C4690A691FF645AE009E9600 /* pinning2.jpg */; };
 		C4C500591FF48BD7004DDC11 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C500581FF48BD7004DDC11 /* main.m */; };
 		C4C5005C1FF48BD7004DDC11 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C5005B1FF48BD7004DDC11 /* AppDelegate.m */; };
 		C4C5005F1FF48BD7004DDC11 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C5005E1FF48BD7004DDC11 /* ViewController.m */; };
@@ -20,6 +27,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C4690A631FF645AE009E9600 /* alum.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = alum.jpg; sourceTree = "<group>"; };
+		C4690A641FF645AE009E9600 /* alum2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = alum2.jpg; sourceTree = "<group>"; };
+		C4690A651FF645AE009E9600 /* alum3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = alum3.jpg; sourceTree = "<group>"; };
+		C4690A661FF645AE009E9600 /* grain.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = grain.jpg; sourceTree = "<group>"; };
+		C4690A671FF645AE009E9600 /* grain2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = grain2.jpg; sourceTree = "<group>"; };
+		C4690A681FF645AE009E9600 /* pinning.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pinning.jpg; sourceTree = "<group>"; };
+		C4690A691FF645AE009E9600 /* pinning2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pinning2.jpg; sourceTree = "<group>"; };
 		C4C500541FF48BD7004DDC11 /* GPUMultiFIlter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GPUMultiFIlter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4C500581FF48BD7004DDC11 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C4C5005A1FF48BD7004DDC11 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -50,6 +64,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C4690A621FF64525009E9600 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C4690A631FF645AE009E9600 /* alum.jpg */,
+				C4690A641FF645AE009E9600 /* alum2.jpg */,
+				C4690A651FF645AE009E9600 /* alum3.jpg */,
+				C4690A661FF645AE009E9600 /* grain.jpg */,
+				C4690A671FF645AE009E9600 /* grain2.jpg */,
+				C4690A681FF645AE009E9600 /* pinning.jpg */,
+				C4690A691FF645AE009E9600 /* pinning2.jpg */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		C4C5004B1FF48BD7004DDC11 = {
 			isa = PBXGroup;
 			children = (
@@ -69,6 +97,7 @@
 		C4C500561FF48BD7004DDC11 /* GPUMultiFIlter */ = {
 			isa = PBXGroup;
 			children = (
+				C4690A621FF64525009E9600 /* Resources */,
 				C4C500731FF49AFC004DDC11 /* Filters */,
 				C4C500711FF49052004DDC11 /* 3.jpg */,
 				C4C5006E1FF48DBD004DDC11 /* GPUImage.framework */,
@@ -162,10 +191,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4690A701FF645AE009E9600 /* pinning2.jpg in Resources */,
 				C4C500671FF48BD7004DDC11 /* LaunchScreen.storyboard in Resources */,
+				C4690A6D1FF645AE009E9600 /* grain.jpg in Resources */,
+				C4690A6A1FF645AE009E9600 /* alum.jpg in Resources */,
 				C4C500641FF48BD7004DDC11 /* Assets.xcassets in Resources */,
 				C4C500621FF48BD7004DDC11 /* Main.storyboard in Resources */,
+				C4690A6E1FF645AE009E9600 /* grain2.jpg in Resources */,
+				C4690A6C1FF645AE009E9600 /* alum3.jpg in Resources */,
+				C4690A6F1FF645AE009E9600 /* pinning.jpg in Resources */,
 				C4C500721FF49052004DDC11 /* 3.jpg in Resources */,
+				C4690A6B1FF645AE009E9600 /* alum2.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +387,7 @@
 				C4C5006D1FF48BD7004DDC11 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
