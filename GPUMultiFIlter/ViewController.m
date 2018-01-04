@@ -10,18 +10,17 @@
 #import <GPUImage/GPUImage.h>
 #import "FilterCircle.h"
 #import "FilterLine.h"
+#import "FZTexture.h"
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet GPUImageView *imageView;
-
+@property (strong, nonatomic) FZTexture *imageTexture;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    GPUImagePicture *picture = [[GPUImagePicture alloc] initWithImage:[UIImage imageNamed:@"3.jpg"]];
-    [picture addTarget:_imageView];
-    [picture processImage];
+    _imageTexture=[[FZTexture alloc] initWithImage:[UIImage imageNamed:@"3.jpg"]];
 }
 
 
@@ -33,11 +32,12 @@
 - (IBAction)onButtonProcess:(id)sender {
     FilterCircle *filter=[FilterCircle new];
     FilterLine *filter2=[FilterLine new];
-    GPUImagePicture *picture = [[GPUImagePicture alloc] initWithImage:[UIImage imageNamed:@"3.jpg"]];
-    [picture addTarget:filter];
+//    GPUImagePicture *picture = [[GPUImagePicture alloc] initWithImage:[UIImage imageNamed:@"3.jpg"]];
+//    [picture addTarget:filter];
     [filter addTarget:filter2];
     [filter2 addTarget:_imageView];
-    [picture processImage];
+//    [picture processImage];
+    [_imageTexture processTextureToFilter:filter];
 }
 
 @end

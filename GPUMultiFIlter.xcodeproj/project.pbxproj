@@ -14,6 +14,26 @@
 		C4690A6E1FF645AE009E9600 /* grain2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C4690A671FF645AE009E9600 /* grain2.jpg */; };
 		C4690A6F1FF645AE009E9600 /* pinning.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C4690A681FF645AE009E9600 /* pinning.jpg */; };
 		C4690A701FF645AE009E9600 /* pinning2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C4690A691FF645AE009E9600 /* pinning2.jpg */; };
+		C46A0B811FFB68790055FCDC /* AddPigment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = C46A0B6F1FFB68790055FCDC /* AddPigment.glsl */; };
+		C46A0B821FFB68790055FCDC /* AddWater.glsl in Resources */ = {isa = PBXBuildFile; fileRef = C46A0B701FFB68790055FCDC /* AddWater.glsl */; };
+		C46A0B831FFB68790055FCDC /* Block.glsl in Resources */ = {isa = PBXBuildFile; fileRef = C46A0B711FFB68790055FCDC /* Block.glsl */; };
+		C46A0B841FFB68790055FCDC /* Collide1.glsl in Resources */ = {isa = PBXBuildFile; fileRef = C46A0B721FFB68790055FCDC /* Collide1.glsl */; };
+		C46A0B851FFB68790055FCDC /* Collide2.glsl in Resources */ = {isa = PBXBuildFile; fileRef = C46A0B731FFB68790055FCDC /* Collide2.glsl */; };
+		C46A0B861FFB68790055FCDC /* Gap.glsl in Resources */ = {isa = PBXBuildFile; fileRef = C46A0B741FFB68790055FCDC /* Gap.glsl */; };
+		C46A0B871FFB68790055FCDC /* GetVelDen.glsl in Resources */ = {isa = PBXBuildFile; fileRef = C46A0B751FFB68790055FCDC /* GetVelDen.glsl */; };
+		C46A0B881FFB68790055FCDC /* GetXYZ.glsl in Resources */ = {isa = PBXBuildFile; fileRef = C46A0B761FFB68790055FCDC /* GetXYZ.glsl */; };
+		C46A0B891FFB68790055FCDC /* GetZ.glsl in Resources */ = {isa = PBXBuildFile; fileRef = C46A0B771FFB68790055FCDC /* GetZ.glsl */; };
+		C46A0B8A1FFB68790055FCDC /* Ink.glsl in Resources */ = {isa = PBXBuildFile; fileRef = C46A0B781FFB68790055FCDC /* Ink.glsl */; };
+		C46A0B8B1FFB68790055FCDC /* Ink.vsh in Resources */ = {isa = PBXBuildFile; fileRef = C46A0B791FFB68790055FCDC /* Ink.vsh */; };
+		C46A0B8C1FFB68790055FCDC /* InkFlow.glsl in Resources */ = {isa = PBXBuildFile; fileRef = C46A0B7A1FFB68790055FCDC /* InkFlow.glsl */; };
+		C46A0B8D1FFB68790055FCDC /* InkSupply.glsl in Resources */ = {isa = PBXBuildFile; fileRef = C46A0B7B1FFB68790055FCDC /* InkSupply.glsl */; };
+		C46A0B8E1FFB68790055FCDC /* InkXAmt.glsl in Resources */ = {isa = PBXBuildFile; fileRef = C46A0B7C1FFB68790055FCDC /* InkXAmt.glsl */; };
+		C46A0B8F1FFB68790055FCDC /* InkXFr.glsl in Resources */ = {isa = PBXBuildFile; fileRef = C46A0B7D1FFB68790055FCDC /* InkXFr.glsl */; };
+		C46A0B901FFB68790055FCDC /* InkXTo.glsl in Resources */ = {isa = PBXBuildFile; fileRef = C46A0B7E1FFB68790055FCDC /* InkXTo.glsl */; };
+		C46A0B911FFB68790055FCDC /* Stream1.glsl in Resources */ = {isa = PBXBuildFile; fileRef = C46A0B7F1FFB68790055FCDC /* Stream1.glsl */; };
+		C46A0B921FFB68790055FCDC /* Stream2.glsl in Resources */ = {isa = PBXBuildFile; fileRef = C46A0B801FFB68790055FCDC /* Stream2.glsl */; };
+		C46A0B961FFB6A010055FCDC /* FZInkSim.m in Sources */ = {isa = PBXBuildFile; fileRef = C46A0B951FFB6A010055FCDC /* FZInkSim.m */; };
+		C46C5B121FFCA94E00B3F259 /* FZTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = C46C5B111FFCA94E00B3F259 /* FZTexture.m */; };
 		C4C500591FF48BD7004DDC11 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C500581FF48BD7004DDC11 /* main.m */; };
 		C4C5005C1FF48BD7004DDC11 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C5005B1FF48BD7004DDC11 /* AppDelegate.m */; };
 		C4C5005F1FF48BD7004DDC11 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C5005E1FF48BD7004DDC11 /* ViewController.m */; };
@@ -34,6 +54,28 @@
 		C4690A671FF645AE009E9600 /* grain2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = grain2.jpg; sourceTree = "<group>"; };
 		C4690A681FF645AE009E9600 /* pinning.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pinning.jpg; sourceTree = "<group>"; };
 		C4690A691FF645AE009E9600 /* pinning2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pinning2.jpg; sourceTree = "<group>"; };
+		C46A0B6F1FFB68790055FCDC /* AddPigment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AddPigment.glsl; sourceTree = "<group>"; };
+		C46A0B701FFB68790055FCDC /* AddWater.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AddWater.glsl; sourceTree = "<group>"; };
+		C46A0B711FFB68790055FCDC /* Block.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Block.glsl; sourceTree = "<group>"; };
+		C46A0B721FFB68790055FCDC /* Collide1.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Collide1.glsl; sourceTree = "<group>"; };
+		C46A0B731FFB68790055FCDC /* Collide2.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Collide2.glsl; sourceTree = "<group>"; };
+		C46A0B741FFB68790055FCDC /* Gap.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Gap.glsl; sourceTree = "<group>"; };
+		C46A0B751FFB68790055FCDC /* GetVelDen.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GetVelDen.glsl; sourceTree = "<group>"; };
+		C46A0B761FFB68790055FCDC /* GetXYZ.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GetXYZ.glsl; sourceTree = "<group>"; };
+		C46A0B771FFB68790055FCDC /* GetZ.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GetZ.glsl; sourceTree = "<group>"; };
+		C46A0B781FFB68790055FCDC /* Ink.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Ink.glsl; sourceTree = "<group>"; };
+		C46A0B791FFB68790055FCDC /* Ink.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Ink.vsh; sourceTree = "<group>"; };
+		C46A0B7A1FFB68790055FCDC /* InkFlow.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = InkFlow.glsl; sourceTree = "<group>"; };
+		C46A0B7B1FFB68790055FCDC /* InkSupply.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = InkSupply.glsl; sourceTree = "<group>"; };
+		C46A0B7C1FFB68790055FCDC /* InkXAmt.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = InkXAmt.glsl; sourceTree = "<group>"; };
+		C46A0B7D1FFB68790055FCDC /* InkXFr.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = InkXFr.glsl; sourceTree = "<group>"; };
+		C46A0B7E1FFB68790055FCDC /* InkXTo.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = InkXTo.glsl; sourceTree = "<group>"; };
+		C46A0B7F1FFB68790055FCDC /* Stream1.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Stream1.glsl; sourceTree = "<group>"; };
+		C46A0B801FFB68790055FCDC /* Stream2.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Stream2.glsl; sourceTree = "<group>"; };
+		C46A0B941FFB6A010055FCDC /* FZInkSim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FZInkSim.h; sourceTree = "<group>"; };
+		C46A0B951FFB6A010055FCDC /* FZInkSim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZInkSim.m; sourceTree = "<group>"; };
+		C46C5B101FFCA94E00B3F259 /* FZTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FZTexture.h; sourceTree = "<group>"; };
+		C46C5B111FFCA94E00B3F259 /* FZTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZTexture.m; sourceTree = "<group>"; };
 		C4C500541FF48BD7004DDC11 /* GPUMultiFIlter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GPUMultiFIlter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4C500581FF48BD7004DDC11 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C4C5005A1FF48BD7004DDC11 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -78,6 +120,42 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		C46A0B6E1FFB68790055FCDC /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				C46A0B6F1FFB68790055FCDC /* AddPigment.glsl */,
+				C46A0B701FFB68790055FCDC /* AddWater.glsl */,
+				C46A0B711FFB68790055FCDC /* Block.glsl */,
+				C46A0B721FFB68790055FCDC /* Collide1.glsl */,
+				C46A0B731FFB68790055FCDC /* Collide2.glsl */,
+				C46A0B741FFB68790055FCDC /* Gap.glsl */,
+				C46A0B751FFB68790055FCDC /* GetVelDen.glsl */,
+				C46A0B761FFB68790055FCDC /* GetXYZ.glsl */,
+				C46A0B771FFB68790055FCDC /* GetZ.glsl */,
+				C46A0B781FFB68790055FCDC /* Ink.glsl */,
+				C46A0B791FFB68790055FCDC /* Ink.vsh */,
+				C46A0B7A1FFB68790055FCDC /* InkFlow.glsl */,
+				C46A0B7B1FFB68790055FCDC /* InkSupply.glsl */,
+				C46A0B7C1FFB68790055FCDC /* InkXAmt.glsl */,
+				C46A0B7D1FFB68790055FCDC /* InkXFr.glsl */,
+				C46A0B7E1FFB68790055FCDC /* InkXTo.glsl */,
+				C46A0B7F1FFB68790055FCDC /* Stream1.glsl */,
+				C46A0B801FFB68790055FCDC /* Stream2.glsl */,
+			);
+			path = Shaders;
+			sourceTree = "<group>";
+		};
+		C46A0B931FFB69680055FCDC /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				C46A0B941FFB6A010055FCDC /* FZInkSim.h */,
+				C46A0B951FFB6A010055FCDC /* FZInkSim.m */,
+				C46C5B101FFCA94E00B3F259 /* FZTexture.h */,
+				C46C5B111FFCA94E00B3F259 /* FZTexture.m */,
+			);
+			path = Engine;
+			sourceTree = "<group>";
+		};
 		C4C5004B1FF48BD7004DDC11 = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +175,8 @@
 		C4C500561FF48BD7004DDC11 /* GPUMultiFIlter */ = {
 			isa = PBXGroup;
 			children = (
+				C46A0B931FFB69680055FCDC /* Engine */,
+				C46A0B6E1FFB68790055FCDC /* Shaders */,
 				C4690A621FF64525009E9600 /* Resources */,
 				C4C500731FF49AFC004DDC11 /* Filters */,
 				C4C500711FF49052004DDC11 /* 3.jpg */,
@@ -192,15 +272,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4690A701FF645AE009E9600 /* pinning2.jpg in Resources */,
+				C46A0B8A1FFB68790055FCDC /* Ink.glsl in Resources */,
 				C4C500671FF48BD7004DDC11 /* LaunchScreen.storyboard in Resources */,
 				C4690A6D1FF645AE009E9600 /* grain.jpg in Resources */,
+				C46A0B8B1FFB68790055FCDC /* Ink.vsh in Resources */,
+				C46A0B8F1FFB68790055FCDC /* InkXFr.glsl in Resources */,
+				C46A0B891FFB68790055FCDC /* GetZ.glsl in Resources */,
 				C4690A6A1FF645AE009E9600 /* alum.jpg in Resources */,
+				C46A0B811FFB68790055FCDC /* AddPigment.glsl in Resources */,
 				C4C500641FF48BD7004DDC11 /* Assets.xcassets in Resources */,
 				C4C500621FF48BD7004DDC11 /* Main.storyboard in Resources */,
 				C4690A6E1FF645AE009E9600 /* grain2.jpg in Resources */,
+				C46A0B901FFB68790055FCDC /* InkXTo.glsl in Resources */,
 				C4690A6C1FF645AE009E9600 /* alum3.jpg in Resources */,
+				C46A0B821FFB68790055FCDC /* AddWater.glsl in Resources */,
+				C46A0B8D1FFB68790055FCDC /* InkSupply.glsl in Resources */,
 				C4690A6F1FF645AE009E9600 /* pinning.jpg in Resources */,
+				C46A0B851FFB68790055FCDC /* Collide2.glsl in Resources */,
+				C46A0B8E1FFB68790055FCDC /* InkXAmt.glsl in Resources */,
+				C46A0B881FFB68790055FCDC /* GetXYZ.glsl in Resources */,
+				C46A0B831FFB68790055FCDC /* Block.glsl in Resources */,
+				C46A0B911FFB68790055FCDC /* Stream1.glsl in Resources */,
+				C46A0B921FFB68790055FCDC /* Stream2.glsl in Resources */,
+				C46A0B861FFB68790055FCDC /* Gap.glsl in Resources */,
+				C46A0B8C1FFB68790055FCDC /* InkFlow.glsl in Resources */,
+				C46A0B841FFB68790055FCDC /* Collide1.glsl in Resources */,
 				C4C500721FF49052004DDC11 /* 3.jpg in Resources */,
+				C46A0B871FFB68790055FCDC /* GetVelDen.glsl in Resources */,
 				C4690A6B1FF645AE009E9600 /* alum2.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -214,6 +312,8 @@
 			files = (
 				C4C5005F1FF48BD7004DDC11 /* ViewController.m in Sources */,
 				C4C500761FF49B45004DDC11 /* FilterCircle.m in Sources */,
+				C46A0B961FFB6A010055FCDC /* FZInkSim.m in Sources */,
+				C46C5B121FFCA94E00B3F259 /* FZTexture.m in Sources */,
 				C4C500791FF4C9D0004DDC11 /* FilterLine.m in Sources */,
 				C4C5005C1FF48BD7004DDC11 /* AppDelegate.m in Sources */,
 				C4C500591FF48BD7004DDC11 /* main.m in Sources */,
