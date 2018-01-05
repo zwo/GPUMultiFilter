@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C45866A51FFF4BE100BCBC5E /* FZFramebuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = C45866A41FFF4BE100BCBC5E /* FZFramebuffer.m */; };
+		C45866C61FFF76D200BCBC5E /* TestDraw.m in Sources */ = {isa = PBXBuildFile; fileRef = C45866C51FFF76D200BCBC5E /* TestDraw.m */; };
 		C4690A6A1FF645AE009E9600 /* alum.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C4690A631FF645AE009E9600 /* alum.jpg */; };
 		C4690A6B1FF645AE009E9600 /* alum2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C4690A641FF645AE009E9600 /* alum2.jpg */; };
 		C4690A6C1FF645AE009E9600 /* alum3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C4690A651FF645AE009E9600 /* alum3.jpg */; };
@@ -47,6 +49,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C45866A31FFF4BE100BCBC5E /* FZFramebuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FZFramebuffer.h; sourceTree = "<group>"; };
+		C45866A41FFF4BE100BCBC5E /* FZFramebuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZFramebuffer.m; sourceTree = "<group>"; };
+		C45866C41FFF76D200BCBC5E /* TestDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestDraw.h; sourceTree = "<group>"; };
+		C45866C51FFF76D200BCBC5E /* TestDraw.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestDraw.m; sourceTree = "<group>"; };
 		C4690A631FF645AE009E9600 /* alum.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = alum.jpg; sourceTree = "<group>"; };
 		C4690A641FF645AE009E9600 /* alum2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = alum2.jpg; sourceTree = "<group>"; };
 		C4690A651FF645AE009E9600 /* alum3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = alum3.jpg; sourceTree = "<group>"; };
@@ -152,6 +158,10 @@
 				C46A0B951FFB6A010055FCDC /* FZInkSim.m */,
 				C46C5B101FFCA94E00B3F259 /* FZTexture.h */,
 				C46C5B111FFCA94E00B3F259 /* FZTexture.m */,
+				C45866A31FFF4BE100BCBC5E /* FZFramebuffer.h */,
+				C45866A41FFF4BE100BCBC5E /* FZFramebuffer.m */,
+				C45866C41FFF76D200BCBC5E /* TestDraw.h */,
+				C45866C51FFF76D200BCBC5E /* TestDraw.m */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -313,10 +323,12 @@
 				C4C5005F1FF48BD7004DDC11 /* ViewController.m in Sources */,
 				C4C500761FF49B45004DDC11 /* FilterCircle.m in Sources */,
 				C46A0B961FFB6A010055FCDC /* FZInkSim.m in Sources */,
+				C45866C61FFF76D200BCBC5E /* TestDraw.m in Sources */,
 				C46C5B121FFCA94E00B3F259 /* FZTexture.m in Sources */,
 				C4C500791FF4C9D0004DDC11 /* FilterLine.m in Sources */,
 				C4C5005C1FF48BD7004DDC11 /* AppDelegate.m in Sources */,
 				C4C500591FF48BD7004DDC11 /* main.m in Sources */,
+				C45866A51FFF4BE100BCBC5E /* FZFramebuffer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
