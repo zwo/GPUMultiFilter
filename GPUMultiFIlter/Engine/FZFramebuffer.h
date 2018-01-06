@@ -14,4 +14,5 @@
 - (instancetype)initWithSize:(CGSize)size textureOptions:(GPUTextureOptions)fboTextureOptions;
 - (instancetype)initWithSize:(CGSize)size textureOptions:(GPUTextureOptions)fboTextureOptions onlyTexture:(BOOL)onlyGenerateTexture;
 - (void)activateFramebuffer;
+- (void)feedFramebufferToFilter:(id<GPUImageInput>)filter;
 @end

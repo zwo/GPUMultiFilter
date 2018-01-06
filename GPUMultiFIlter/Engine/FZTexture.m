@@ -147,7 +147,8 @@
 }
 
 - (void)dealloc;
-{    
+{
+    [self.outputFramebuffer destroyFramebuffer];   
 #if !OS_OBJECT_USE_OBJC
     if (_imageUpdateSemaphore != NULL)
     {

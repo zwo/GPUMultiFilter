@@ -21,7 +21,7 @@
         return nil;
     }
     self.outputFramebuffer=[[GPUImageFramebuffer alloc] initWithSize:size textureOptions:fboTextureOptions onlyTexture:onlyGenerateTexture];
-    [self.outputFramebuffer disableReferenceCounting];
+    [self.outputFramebuffer disableReferenceCounting];    
     return self;
 }
 
@@ -49,9 +49,23 @@
     return self;
 }
 
+- (void)dealloc
+{
+    [self.outputFramebuffer destroyFramebuffer];
+}
+
 - (void)activateFramebuffer
 {
     [self.outputFramebuffer activateFramebuffer];
+}
+
+- (void)feedFramebufferToFilter:(id<GPUImageInput>)filter
+{
+    NSInteger nextAvailableTextureIndex = [filter nextAvailableTextureIndex];
+    [filter setCurrentlyReceivingMonochromeInput:NO];
+    [filter setInputSize:self.texturePixelSize atIndex:nextAvailableTextureIndex];
+    [filter setInputFramebuffer:self.outputFramebuffer atIndex:nextAvailableTextureIndex];
+    [filter newFrameReadyAtTime:kCMTimeIndefinite atIndex:nextAvailableTextureIndex];
 }
 
 @end

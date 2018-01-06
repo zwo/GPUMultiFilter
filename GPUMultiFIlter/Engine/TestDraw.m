@@ -52,6 +52,7 @@ const GLubyte Indices[] = {
 
 + (void)drawRect
 {
+    [GPUImageContext useImageProcessingContext];
     GLProgram *program=[[GLProgram alloc] initWithVertexShaderString:kRectVertShader fragmentShaderString:kRectFragShader];
     [program addAttribute:@"position"];
     [program addAttribute:@"SourceColor"];
