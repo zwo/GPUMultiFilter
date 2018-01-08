@@ -49,11 +49,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [self.outputFramebuffer destroyFramebuffer];
-}
-
 - (void)activateFramebuffer
 {
     [self.outputFramebuffer activateFramebuffer];
