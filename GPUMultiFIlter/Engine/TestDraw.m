@@ -52,14 +52,15 @@ const GLubyte Indices[] = {
 
 + (void)drawRect
 {
-    [GPUImageContext useImageProcessingContext];
+//    [GPUImageContext useImageProcessingContext];
     GLProgram *program=[[GLProgram alloc] initWithVertexShaderString:kRectVertShader fragmentShaderString:kRectFragShader];
     [program addAttribute:@"position"];
     [program addAttribute:@"SourceColor"];
     [self linkProgram:program];
     GLint positionAttrib=[program attributeIndex:@"position"];
     GLint sourceColorAttrib=[program attributeIndex:@"SourceColor"];
-    [GPUImageContext setActiveShaderProgram:program];
+//    [GPUImageContext setActiveShaderProgram:program];
+    [program use];
     glEnableVertexAttribArray(positionAttrib);
     glEnableVertexAttribArray(sourceColorAttrib);
     
@@ -76,7 +77,7 @@ const GLubyte Indices[] = {
     glClearColor(0, 104.0/255.0, 55.0/255.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
     
-    glViewport(0, 0, 128, 128);
+    glViewport(0, 0, 261, 172);
     glVertexAttribPointer(positionAttrib, 3, GL_FLOAT, GL_FALSE,
                           sizeof(Vertex), 0);
     glVertexAttribPointer(sourceColorAttrib, 4, GL_FLOAT, GL_FALSE,

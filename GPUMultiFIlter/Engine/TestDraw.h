@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <GPUImage/GPUImage.h>
+#import "GPUImage.h"
 @interface TestDraw : NSObject
 + (void)drawRect;
 @end

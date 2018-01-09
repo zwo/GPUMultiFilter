@@ -7,12 +7,13 @@
 //
 
 #import "ViewController.h"
-#import <GPUImage/GPUImage.h>
+#import "GPUImage.h"
 #import "FilterCircle.h"
 #import "FilterLine.h"
 #import "FZTexture.h"
 #import "FZFramebuffer.h"
 #import "TestDraw.h"
+#import "OpenGLView.h"
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet GPUImageView *imageView;
 @property (strong, nonatomic) FZTexture *imageTexture;
@@ -35,6 +36,14 @@
     [self test];
 }
 
+- (IBAction)onButtonTestVC:(id)sender {
+    CGRect frame=self.imageView.frame;
+    frame.origin.y=CGRectGetMaxY(frame) + 20;
+    OpenGLView *view=[[OpenGLView alloc] initWithFrame:frame];
+    [self.view addSubview:view];
+}
+
+
 - (void)test
 {
 	runAsynchronouslyOnVideoProcessingQueue(^{        
@@ -43,8 +52,6 @@
         [TestDraw drawRect];
         [fbo feedFramebufferToFilter:self.imageView];
     });
-	
-
 }
 
 @end

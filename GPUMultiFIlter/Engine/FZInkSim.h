@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <GPUImage/GPUImage.h>
+#import "GPUImage.h"
 typedef struct fzuniformInfos
 {
     float brushsize;

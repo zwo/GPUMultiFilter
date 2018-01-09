@@ -6,7 +6,7 @@
 //  Copyright © 2017年 周维鸥. All rights reserved.
 //
 
-#import <GPUImage/GPUImage.h>
+#import "GPUImage.h"
 
 @interface FilterCircle : GPUImageFilter
 

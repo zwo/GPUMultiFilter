@@ -21,7 +21,8 @@
         return nil;
     }
     self.outputFramebuffer=[[GPUImageFramebuffer alloc] initWithSize:size textureOptions:fboTextureOptions onlyTexture:onlyGenerateTexture];
-    [self.outputFramebuffer disableReferenceCounting];    
+    [self.outputFramebuffer disableReferenceCounting];
+    _texturePixelSize=size;
     return self;
 }
 
@@ -47,6 +48,11 @@
         return nil;
     }
     return self;
+}
+
+- (void)dealloc
+{
+    NSLog(@"dealloc");
 }
 
 - (void)activateFramebuffer

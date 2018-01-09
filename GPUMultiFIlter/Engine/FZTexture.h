@@ -6,7 +6,7 @@
 //  Copyright © 2018年 周维鸥. All rights reserved.
 //
 
-#import <GPUImage/GPUImage.h>
+#import "GPUImage.h"
 
 @interface FZTexture : NSObject
 @property (assign, nonatomic, readonly) CGSize texturePixelSize;

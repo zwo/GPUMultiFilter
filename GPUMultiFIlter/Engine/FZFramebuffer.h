@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <GPUImage/GPUImage.h>
+#import "GPUImage.h"
 @interface FZFramebuffer : NSObject
 @property (assign, nonatomic, readonly) CGSize texturePixelSize;
 - (instancetype)initWithSize:(CGSize)size;
