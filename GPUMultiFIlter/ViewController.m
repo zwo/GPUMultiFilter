@@ -43,12 +43,8 @@
         FZFramebuffer *fbo=[[FZFramebuffer alloc] initWithSize:CGSizeMake(261,172)];
         [fbo beginDrawingWithRenderbufferSize:CGSizeMake(261, 172)];
         [TestDraw drawRect];
-        UIImage *image=[fbo testEndDrawing];
-        runOnMainQueueWithoutDeadlocking(^{
-            self.testImageView.image=image;
-        });
-//        [fbo endDrawing];
-//        [fbo feedFramebufferToFilter:self.imageView];
+        [fbo endDrawing];
+        [fbo feedFramebufferToFilter:self.imageView];        
     });
 	
 

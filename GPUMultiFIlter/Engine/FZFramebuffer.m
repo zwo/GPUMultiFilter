@@ -13,6 +13,7 @@
 @property (assign, nonatomic) GLuint framebufferForDrawing;
 @property (assign, nonatomic) GLuint colorRenderbufferForDrawing;
 @property (assign, nonatomic) CGSize drawingRenderbufferSize;
+@property (strong, nonatomic) GPUImagePicture *picture;
 @end
 
 @implementation FZFramebuffer
@@ -23,8 +24,8 @@
     {
         return nil;
     }
-    self.outputFramebuffer=[[GPUImageFramebuffer alloc] initWithSize:size textureOptions:fboTextureOptions onlyTexture:onlyGenerateTexture];
-    [self.outputFramebuffer disableReferenceCounting];
+//    self.outputFramebuffer=[[GPUImageFramebuffer alloc] initWithSize:size textureOptions:fboTextureOptions onlyTexture:onlyGenerateTexture];
+//    [self.outputFramebuffer disableReferenceCounting];
     _texturePixelSize=size;
     return self;
 }
@@ -55,6 +56,7 @@
 
 - (void)createFramebufferWithSize:(CGSize)size
 {
+    [GPUImageContext useImageProcessingContext];
     GLuint framebuffer;
     glGenFramebuffers(1, &framebuffer);
     glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
@@ -84,11 +86,13 @@
 
 - (void)feedFramebufferToFilter:(id<GPUImageInput>)filter
 {
-    NSInteger nextAvailableTextureIndex = [filter nextAvailableTextureIndex];
-    [filter setCurrentlyReceivingMonochromeInput:NO];
-    [filter setInputSize:self.texturePixelSize atIndex:nextAvailableTextureIndex];
-    [filter setInputFramebuffer:self.outputFramebuffer atIndex:nextAvailableTextureIndex];
-    [filter newFrameReadyAtTime:kCMTimeIndefinite atIndex:nextAvailableTextureIndex];
+//    NSInteger nextAvailableTextureIndex = [filter nextAvailableTextureIndex];
+//    [filter setCurrentlyReceivingMonochromeInput:NO];
+//    [filter setInputSize:self.texturePixelSize atIndex:nextAvailableTextureIndex];
+//    [filter setInputFramebuffer:self.outputFramebuffer atIndex:nextAvailableTextureIndex];
+//    [filter newFrameReadyAtTime:kCMTimeIndefinite atIndex:nextAvailableTextureIndex];
+    [self.picture addTarget:filter];
+    [self.picture processImage];
 }
 
 - (void)beginDrawingWithRenderbufferSize:(CGSize)size
@@ -98,16 +102,22 @@
 
 - (void)endDrawing
 {
+    //https://github.com/slembcke/CloudBomber/blob/15c85d8be773104fe6fc3acc05db748ecc1c9525/CloudBomber/ChipmunkGLRenderBufferSampler.m
+    //NSMutableData *pixelData = [NSMutableData dataWithLength:stride*height];
+    //[(NSMutableData *)self.pixelData mutableBytes]
     GLubyte *imageData = NULL;
     imageData = (GLubyte *) calloc(1, (int)_drawingRenderbufferSize.width * (int)_drawingRenderbufferSize.height * 4);
+    glFlush();
     glReadPixels(0, 0, _drawingRenderbufferSize.width, _drawingRenderbufferSize.height, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
-    [GPUImageContext useImageProcessingContext];
-    [_outputFramebuffer activateFramebuffer];
-    glBindTexture(GL_TEXTURE_2D, [_outputFramebuffer texture]);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (int)_texturePixelSize.width, (int)_texturePixelSize.height, 0, GL_RGBA8_OES, GL_UNSIGNED_BYTE, imageData);
+    UIImage *image=[TestDraw imageWithBuffer:imageData ofSize:_drawingRenderbufferSize];
+    self.picture=[[GPUImagePicture alloc] initWithImage:image smoothlyScaleOutput:YES removePremultiplication:YES];
     glDeleteRenderbuffers(1, &_framebufferForDrawing);
     glDeleteRenderbuffers(1, &_colorRenderbufferForDrawing);
-    free(imageData);
+    GLenum errCode = glGetError();
+    if (errCode!=GL_NO_ERROR) {
+        NSLog(@"113 error code %x", errCode);
+    }
+//    free(imageData);
 }
 
 - (UIImage *)testEndDrawing

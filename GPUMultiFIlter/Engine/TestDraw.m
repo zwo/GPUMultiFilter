@@ -75,7 +75,7 @@ const GLubyte Indices[] = {
     
     glClearColor(0, 104.0/255.0, 55.0/255.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
-    
+
     glViewport(0, 0, 128, 128);
     glVertexAttribPointer(positionAttrib, 3, GL_FLOAT, GL_FALSE,
                           sizeof(Vertex), 0);
