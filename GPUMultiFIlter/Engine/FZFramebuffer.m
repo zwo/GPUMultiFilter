@@ -7,9 +7,12 @@
 //
 
 #import "FZFramebuffer.h"
-
+#import "TestDraw.h"
 @interface FZFramebuffer ()
 @property (strong, nonatomic) GPUImageFramebuffer *outputFramebuffer;
+@property (assign, nonatomic) GLuint framebufferForDrawing;
+@property (assign, nonatomic) GLuint colorRenderbufferForDrawing;
+@property (assign, nonatomic) CGSize drawingRenderbufferSize;
 @end
 
 @implementation FZFramebuffer
@@ -21,7 +24,8 @@
         return nil;
     }
     self.outputFramebuffer=[[GPUImageFramebuffer alloc] initWithSize:size textureOptions:fboTextureOptions onlyTexture:onlyGenerateTexture];
-    [self.outputFramebuffer disableReferenceCounting];    
+    [self.outputFramebuffer disableReferenceCounting];
+    _texturePixelSize=size;
     return self;
 }
 
@@ -49,6 +53,30 @@
     return self;
 }
 
+- (void)createFramebufferWithSize:(CGSize)size
+{
+    GLuint framebuffer;
+    glGenFramebuffers(1, &framebuffer);
+    glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+    
+    GLuint colorRenderbuffer;
+    glGenRenderbuffers(1, &colorRenderbuffer);
+    glBindRenderbuffer(GL_RENDERBUFFER, colorRenderbuffer);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA8_OES, size.width, size.height);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, colorRenderbuffer);
+    
+    GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER) ;
+    if(status != GL_FRAMEBUFFER_COMPLETE) {
+        NSLog(@"failed to make complete framebuffer object %x", status);        
+        GLenum errCode;
+        errCode = glGetError();
+        NSLog(@"error code %x", errCode);
+    }
+    _framebufferForDrawing=framebuffer;
+    _colorRenderbufferForDrawing=colorRenderbuffer;
+    _drawingRenderbufferSize=size;
+}
+
 - (void)activateFramebuffer
 {
     [self.outputFramebuffer activateFramebuffer];
@@ -61,6 +89,37 @@
     [filter setInputSize:self.texturePixelSize atIndex:nextAvailableTextureIndex];
     [filter setInputFramebuffer:self.outputFramebuffer atIndex:nextAvailableTextureIndex];
     [filter newFrameReadyAtTime:kCMTimeIndefinite atIndex:nextAvailableTextureIndex];
+}
+
+- (void)beginDrawingWithRenderbufferSize:(CGSize)size
+{
+    [self createFramebufferWithSize:size];
+}
+
+- (void)endDrawing
+{
+    GLubyte *imageData = NULL;
+    imageData = (GLubyte *) calloc(1, (int)_drawingRenderbufferSize.width * (int)_drawingRenderbufferSize.height * 4);
+    glReadPixels(0, 0, _drawingRenderbufferSize.width, _drawingRenderbufferSize.height, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
+    [GPUImageContext useImageProcessingContext];
+    [_outputFramebuffer activateFramebuffer];
+    glBindTexture(GL_TEXTURE_2D, [_outputFramebuffer texture]);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (int)_texturePixelSize.width, (int)_texturePixelSize.height, 0, GL_RGBA8_OES, GL_UNSIGNED_BYTE, imageData);
+    glDeleteRenderbuffers(1, &_framebufferForDrawing);
+    glDeleteRenderbuffers(1, &_colorRenderbufferForDrawing);
+    free(imageData);
+}
+
+- (UIImage *)testEndDrawing
+{
+    GLubyte *imageData = NULL;
+    imageData = (GLubyte *) calloc(1, (int)_drawingRenderbufferSize.width * (int)_drawingRenderbufferSize.height * 4);
+    glReadPixels(0, 0, _drawingRenderbufferSize.width, _drawingRenderbufferSize.height, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
+    UIImage *image=[TestDraw imageWithBuffer:imageData ofSize:_drawingRenderbufferSize];
+    glDeleteRenderbuffers(1, &_framebufferForDrawing);
+    glDeleteRenderbuffers(1, &_colorRenderbufferForDrawing);
+    free(imageData);
+    return image;
 }
 
 @end

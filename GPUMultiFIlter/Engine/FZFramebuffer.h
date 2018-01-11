@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <GPUImage/GPUImage.h>
+#import <OpenGLES/ES2/gl.h>
+#import <OpenGLES/ES2/glext.h>
 @interface FZFramebuffer : NSObject
 @property (assign, nonatomic, readonly) CGSize texturePixelSize;
 - (instancetype)initWithSize:(CGSize)size;
@@ -15,4 +17,7 @@
 - (instancetype)initWithSize:(CGSize)size textureOptions:(GPUTextureOptions)fboTextureOptions onlyTexture:(BOOL)onlyGenerateTexture;
 - (void)activateFramebuffer;
 - (void)feedFramebufferToFilter:(id<GPUImageInput>)filter;
+- (void)beginDrawingWithRenderbufferSize:(CGSize)size;
+- (void)endDrawing;
+- (UIImage *)testEndDrawing;
 @end

@@ -102,4 +102,39 @@ const GLubyte Indices[] = {
     return YES;
 }
 
++ (UIImage *)imageWithBuffer:(GLubyte *)buffer ofSize:(CGSize)size
+{
+    GLint width = size.width;
+    GLint height = size.height;
+    
+    NSInteger myDataLength = width * height * 4;
+    
+    CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, buffer, myDataLength, NOCReleaseDataBuffer);
+    
+    // prep the ingredients
+    int bitsPerComponent = 8;
+    int bitsPerPixel = 32;
+    int bytesPerRow = 4 * width;
+    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
+    CGBitmapInfo bitmapInfo = kCGBitmapByteOrderDefault;
+    CGColorRenderingIntent renderingIntent = kCGRenderingIntentDefault;
+    
+    // make the cgimage
+    CGImageRef imageRef = CGImageCreate(width, height, bitsPerComponent, bitsPerPixel, bytesPerRow, colorSpaceRef, bitmapInfo, provider, NULL, NO, renderingIntent);
+    
+    UIImage *myImage = [[UIImage alloc] initWithCGImage:imageRef
+                                                  scale:1
+                                            orientation:UIImageOrientationUp];
+    
+    CGImageRelease(imageRef);
+    CGDataProviderRelease(provider);
+    CGColorSpaceRelease(colorSpaceRef);
+    
+    return myImage;
+}
+
+static void NOCReleaseDataBuffer( void *p , const void *cp , size_t l ) {
+    free((void *)cp);
+}
+
 @end

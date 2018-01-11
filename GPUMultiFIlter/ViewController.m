@@ -15,6 +15,8 @@
 #import "TestDraw.h"
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet GPUImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIImageView *testImageView;
+
 @property (strong, nonatomic) FZTexture *imageTexture;
 @end
 
@@ -38,10 +40,15 @@
 - (void)test
 {
 	runAsynchronouslyOnVideoProcessingQueue(^{        
-        FZFramebuffer *fbo=[[FZFramebuffer alloc] initWithSize:CGSizeMake(1024,640)];
-        [fbo activateFramebuffer];
+        FZFramebuffer *fbo=[[FZFramebuffer alloc] initWithSize:CGSizeMake(261,172)];
+        [fbo beginDrawingWithRenderbufferSize:CGSizeMake(261, 172)];
         [TestDraw drawRect];
-        [fbo feedFramebufferToFilter:self.imageView];
+        UIImage *image=[fbo testEndDrawing];
+        runOnMainQueueWithoutDeadlocking(^{
+            self.testImageView.image=image;
+        });
+//        [fbo endDrawing];
+//        [fbo feedFramebufferToFilter:self.imageView];
     });
 	
 
