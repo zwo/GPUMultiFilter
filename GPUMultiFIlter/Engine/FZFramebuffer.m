@@ -8,6 +8,7 @@
 
 #import "FZFramebuffer.h"
 #import "TestDraw.h"
+#import "FilterLine.h"
 @interface FZFramebuffer ()
 @property (strong, nonatomic) GPUImageFramebuffer *outputFramebuffer;
 @property (assign, nonatomic) GLuint framebufferForDrawing;
@@ -91,7 +92,9 @@
 //    [filter setInputSize:self.texturePixelSize atIndex:nextAvailableTextureIndex];
 //    [filter setInputFramebuffer:self.outputFramebuffer atIndex:nextAvailableTextureIndex];
 //    [filter newFrameReadyAtTime:kCMTimeIndefinite atIndex:nextAvailableTextureIndex];
-    [self.picture addTarget:filter];
+    FilterLine *line=[FilterLine new];
+    [self.picture addTarget:line];
+    [line addTarget:filter];
     [self.picture processImage];
 }
 
