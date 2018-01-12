@@ -16,7 +16,7 @@
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet GPUImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIImageView *testImageView;
-
+@property (strong, nonatomic) CADisplayLink *displayLink;
 @property (strong, nonatomic) FZTexture *imageTexture;
 @end
 
@@ -25,6 +25,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // _imageTexture=[[FZTexture alloc] initWithImage:[UIImage imageNamed:@"3.jpg"]];
+}
+
+- (void)startDraw
+{
+    _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(drawFrame)];
+    [_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+}
+
+- (void)stopDraw
+{
+    [_displayLink invalidate];
+    _displayLink=nil;
 }
 
 
@@ -46,8 +58,11 @@
         [fbo endDrawing];
         [fbo feedFramebufferToFilter:self.imageView];        
     });
-	
+}
 
+- (void)drawFrame
+{
+    
 }
 
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C43BEE482008B01100B3DD2E /* FZAddPigmentFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BEE472008B01100B3DD2E /* FZAddPigmentFilter.m */; };
 		C45866A51FFF4BE100BCBC5E /* FZFramebuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = C45866A41FFF4BE100BCBC5E /* FZFramebuffer.m */; };
 		C45866C61FFF76D200BCBC5E /* TestDraw.m in Sources */ = {isa = PBXBuildFile; fileRef = C45866C51FFF76D200BCBC5E /* TestDraw.m */; };
 		C4690A6A1FF645AE009E9600 /* alum.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C4690A631FF645AE009E9600 /* alum.jpg */; };
@@ -49,6 +50,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C43BEE462008B01100B3DD2E /* FZAddPigmentFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FZAddPigmentFilter.h; sourceTree = "<group>"; };
+		C43BEE472008B01100B3DD2E /* FZAddPigmentFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZAddPigmentFilter.m; sourceTree = "<group>"; };
 		C45866A31FFF4BE100BCBC5E /* FZFramebuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FZFramebuffer.h; sourceTree = "<group>"; };
 		C45866A41FFF4BE100BCBC5E /* FZFramebuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZFramebuffer.m; sourceTree = "<group>"; };
 		C45866C41FFF76D200BCBC5E /* TestDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestDraw.h; sourceTree = "<group>"; };
@@ -219,6 +222,8 @@
 				C4C500751FF49B45004DDC11 /* FilterCircle.m */,
 				C4C500771FF4C9D0004DDC11 /* FilterLine.h */,
 				C4C500781FF4C9D0004DDC11 /* FilterLine.m */,
+				C43BEE462008B01100B3DD2E /* FZAddPigmentFilter.h */,
+				C43BEE472008B01100B3DD2E /* FZAddPigmentFilter.m */,
 			);
 			path = Filters;
 			sourceTree = "<group>";
@@ -323,6 +328,7 @@
 			files = (
 				C4C5005F1FF48BD7004DDC11 /* ViewController.m in Sources */,
 				C4C500761FF49B45004DDC11 /* FilterCircle.m in Sources */,
+				C43BEE482008B01100B3DD2E /* FZAddPigmentFilter.m in Sources */,
 				C46A0B961FFB6A010055FCDC /* FZInkSim.m in Sources */,
 				C45866C61FFF76D200BCBC5E /* TestDraw.m in Sources */,
 				C46C5B121FFCA94E00B3F259 /* FZTexture.m in Sources */,
