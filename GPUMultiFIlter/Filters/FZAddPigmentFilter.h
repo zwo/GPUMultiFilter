@@ -9,5 +9,7 @@
 #import <GPUImage/GPUImage.h>
 
 @interface FZAddPigmentFilter : GPUImageFilter
-@property(readwrite, nonatomic) CGPoint pxSize;
+@property(readwrite, nonatomic) CGFloat gamma;
+@property(readwrite, nonatomic) CGFloat baseMask;
+- (void)setSurfInkFramebuffer:(GPUImageFramebuffer *)surfInkFramebuffer waterSurfaceFramebuffer:(GPUImageFramebuffer *)waterSurfaceFramebuffer miscFramebuffer:(GPUImageFramebuffer *)miscFramebuffer;
 @end
