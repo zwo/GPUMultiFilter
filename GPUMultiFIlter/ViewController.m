@@ -51,12 +51,16 @@
 
 - (void)test
 {
+    CGSize size=_imageView.frame.size;
+    CGFloat contentScale = [[UIScreen mainScreen] scale];
+    size=CGSizeMake(size.width*contentScale, size.height*contentScale);
+    glViewport(0, 0, size.width,size.height);
 	runAsynchronouslyOnVideoProcessingQueue(^{        
-        FZFramebuffer *fbo=[[FZFramebuffer alloc] initWithSize:CGSizeMake(261,172)];
-        [fbo beginDrawingWithRenderbufferSize:CGSizeMake(261, 172)];
+        FZFramebuffer *fbo=[[FZFramebuffer alloc] initWithSize:size];
+        [fbo beginDrawingWithRenderbufferSize:size];
         [TestDraw drawRect];
         [fbo endDrawing];
-        [fbo feedFramebufferToFilter:self.imageView];        
+        [fbo feedFramebufferToFilter:self.imageView];
     });
 }
 

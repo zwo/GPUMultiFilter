@@ -120,6 +120,18 @@
 //    free(imageData);
 }
 
+- (void)clearRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha
+{
+    [self.outputFramebuffer activateFramebuffer];
+    glClearColor(red / 255., green / 255., blue / 255., alpha / 255.);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+- (void)clear
+{
+    [self clearRed:255 green:0 blue:255 alpha:1];
+}
+
 - (UIImage *)testEndDrawing
 {
     GLubyte *imageData = NULL;

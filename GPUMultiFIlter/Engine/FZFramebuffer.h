@@ -19,5 +19,7 @@
 - (void)feedFramebufferToFilter:(id<GPUImageInput>)filter;
 - (void)beginDrawingWithRenderbufferSize:(CGSize)size;
 - (void)endDrawing;
+- (void)clear;
+- (void)clearRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha;
 - (UIImage *)testEndDrawing;
 @end

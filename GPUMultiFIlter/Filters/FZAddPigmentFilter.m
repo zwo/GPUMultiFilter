@@ -33,7 +33,6 @@
 
     _gammaUniform=[filterProgram uniformIndex:@"gamma"];
     _baseMaskUniform=[filterProgram uniformIndex:@"baseMask"];
-    _nextAvailableTextureIndex=-1;
     return self;
 }
 
@@ -87,7 +86,6 @@
     
     glVertexAttribPointer(filterPositionAttribute, 2, GL_FLOAT, 0, 0, vertices);
 	glVertexAttribPointer(filterTextureCoordinateAttribute, 2, GL_FLOAT, 0, 0, textureCoordinates);
-    glVertexAttribPointer(filterSecondTextureCoordinateAttribute, 2, GL_FLOAT, 0, 0, [[self class] textureCoordinatesForRotation:inputRotation2]);
     
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
