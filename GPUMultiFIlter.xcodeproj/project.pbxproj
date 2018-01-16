@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C43BEE482008B01100B3DD2E /* FZAddPigmentFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = C43BEE472008B01100B3DD2E /* FZAddPigmentFilter.m */; };
 		C445E126200C401A009A4E36 /* FZFramebufferPingPong.m in Sources */ = {isa = PBXBuildFile; fileRef = C445E125200C401A009A4E36 /* FZFramebufferPingPong.m */; };
+		C445E12A200C9B47009A4E36 /* FZPassthroughFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = C445E129200C9B47009A4E36 /* FZPassthroughFilter.m */; };
 		C45866A51FFF4BE100BCBC5E /* FZFramebuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = C45866A41FFF4BE100BCBC5E /* FZFramebuffer.m */; };
 		C45866C61FFF76D200BCBC5E /* TestDraw.m in Sources */ = {isa = PBXBuildFile; fileRef = C45866C51FFF76D200BCBC5E /* TestDraw.m */; };
 		C4690A6A1FF645AE009E9600 /* alum.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C4690A631FF645AE009E9600 /* alum.jpg */; };
@@ -55,6 +56,8 @@
 		C43BEE472008B01100B3DD2E /* FZAddPigmentFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZAddPigmentFilter.m; sourceTree = "<group>"; };
 		C445E124200C401A009A4E36 /* FZFramebufferPingPong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FZFramebufferPingPong.h; sourceTree = "<group>"; };
 		C445E125200C401A009A4E36 /* FZFramebufferPingPong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZFramebufferPingPong.m; sourceTree = "<group>"; };
+		C445E128200C9B47009A4E36 /* FZPassthroughFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FZPassthroughFilter.h; sourceTree = "<group>"; };
+		C445E129200C9B47009A4E36 /* FZPassthroughFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZPassthroughFilter.m; sourceTree = "<group>"; };
 		C45866A31FFF4BE100BCBC5E /* FZFramebuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FZFramebuffer.h; sourceTree = "<group>"; };
 		C45866A41FFF4BE100BCBC5E /* FZFramebuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZFramebuffer.m; sourceTree = "<group>"; };
 		C45866C41FFF76D200BCBC5E /* TestDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestDraw.h; sourceTree = "<group>"; };
@@ -229,6 +232,8 @@
 				C4C500781FF4C9D0004DDC11 /* FilterLine.m */,
 				C43BEE462008B01100B3DD2E /* FZAddPigmentFilter.h */,
 				C43BEE472008B01100B3DD2E /* FZAddPigmentFilter.m */,
+				C445E128200C9B47009A4E36 /* FZPassthroughFilter.h */,
+				C445E129200C9B47009A4E36 /* FZPassthroughFilter.m */,
 			);
 			path = Filters;
 			sourceTree = "<group>";
@@ -341,6 +346,7 @@
 				C4C500791FF4C9D0004DDC11 /* FilterLine.m in Sources */,
 				C4C5005C1FF48BD7004DDC11 /* AppDelegate.m in Sources */,
 				C4C500591FF48BD7004DDC11 /* main.m in Sources */,
+				C445E12A200C9B47009A4E36 /* FZPassthroughFilter.m in Sources */,
 				C45866A51FFF4BE100BCBC5E /* FZFramebuffer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
