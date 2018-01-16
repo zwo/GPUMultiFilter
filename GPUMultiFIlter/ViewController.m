@@ -13,11 +13,15 @@
 #import "FZTexture.h"
 #import "FZFramebuffer.h"
 #import "TestDraw.h"
+#import "FZFramebufferPingPong.h"
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet GPUImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIImageView *testImageView;
 @property (strong, nonatomic) CADisplayLink *displayLink;
 @property (strong, nonatomic) FZTexture *imageTexture;
+@property (strong, nonatomic) NSTimer *timer;
+@property (assign, nonatomic) CGFloat currentLos;
+@property (strong, nonatomic) FZFramebufferPingPong *fboPingPong;
 @end
 
 @implementation ViewController
@@ -25,18 +29,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // _imageTexture=[[FZTexture alloc] initWithImage:[UIImage imageNamed:@"3.jpg"]];
+    self.currentLos=-1.0;
 }
 
 - (void)startDraw
 {
-    _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(drawFrame)];
-    [_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    // 一定要放主线程否则运行一次后就停止了
+    runOnMainQueueWithoutDeadlocking(^{
+        _timer=[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(drawFrame) userInfo:nil repeats:YES];
+        [_timer fire];
+    });
 }
 
 - (void)stopDraw
 {
-    [_displayLink invalidate];
-    _displayLink=nil;
+    [_timer invalidate];
+    _timer=nil;
+    _fboPingPong=nil;
+    _currentLos=0.0;
 }
 
 
@@ -56,17 +66,35 @@
     size=CGSizeMake(size.width*contentScale, size.height*contentScale);
     glViewport(0, 0, size.width,size.height);
 	runAsynchronouslyOnVideoProcessingQueue(^{        
-        FZFramebuffer *fbo=[[FZFramebuffer alloc] initWithSize:size];
-        [fbo beginDrawingWithRenderbufferSize:size];
-        [TestDraw drawRect];
-        [fbo endDrawing];
-        [fbo feedFramebufferToFilter:self.imageView];
+        self.fboPingPong=[[FZFramebufferPingPong alloc] initWithSize:size];
+        FZFramebuffer *fbo=[self.fboPingPong getNewFbo];
+        GPUImagePicture *picture=[[GPUImagePicture alloc] initWithImage:[UIImage imageNamed:@"3.jpg"]];
+        [picture addTarget:fbo];
+        [fbo addTarget:self.imageView];
+        [picture processImage];
+        [self.fboPingPong swap];
+        [self startDraw];
     });
 }
 
 - (void)drawFrame
 {
-    
+    if (self.currentLos>1.0) {
+        [self stopDraw];
+        return;
+    }
+    runAsynchronouslyOnVideoProcessingQueue(^{
+        NSLog(@"%f",self.currentLos);
+        FZFramebuffer *fboRead=[self.fboPingPong getOldFbo];
+        FZFramebuffer *fboWrite=[self.fboPingPong getNewFbo];
+        FilterLine *filter=[FilterLine new];
+        filter.pos=self.currentLos;
+        self.currentLos += 0.1;
+        [filter addTarget:fboWrite];
+        [fboWrite addTarget:self.imageView];
+        [fboRead feedFramebufferToFilter:filter];
+        [self.fboPingPong swap];
+    });
 }
 
 @end

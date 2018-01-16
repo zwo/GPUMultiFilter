@@ -9,5 +9,5 @@
 #import <GPUImage/GPUImage.h>
 
 @interface FilterLine : GPUImageFilter
-
+@property (nonatomic) CGFloat pos;
 @end

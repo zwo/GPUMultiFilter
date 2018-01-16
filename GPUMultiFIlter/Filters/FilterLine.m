@@ -14,6 +14,7 @@ static NSString *const kLineFilterFragmentShaderString = SHADER_STRING
  
  varying vec2 textureCoordinate;
  uniform sampler2D inputImageTexture;
+ uniform float pos;
  
  void main()
  {
@@ -22,7 +23,7 @@ static NSString *const kLineFilterFragmentShaderString = SHADER_STRING
      vec2 uv=textureCoordinate;
      vec2 xy = 2.0 * textureCoordinate - 1.0;
      vec4 color = texture2D(inputImageTexture, uv);
-     if (xy.x<0.5 && xy.x>0.4) {
+     if (xy.x<(pos+0.1) && xy.x>pos) {
          color = mix(color,foreColor,0.5);
      }
      
@@ -31,13 +32,22 @@ static NSString *const kLineFilterFragmentShaderString = SHADER_STRING
  );
 
 @implementation FilterLine
+{
+    GLint _posUniform;
+}
 
 - (instancetype)init
 {
     if (self=[super initWithFragmentShaderFromString:kLineFilterFragmentShaderString]) {
-        //
+        _posUniform=[filterProgram uniformIndex:@"pos"];
     }
     return self;
+}
+
+- (void)setPos:(CGFloat)pos
+{
+    _pos=pos;
+    [self setFloat:pos forUniform:_posUniform program:filterProgram];
 }
 
 @end
