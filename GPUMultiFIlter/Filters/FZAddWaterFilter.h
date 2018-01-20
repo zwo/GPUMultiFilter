@@ -12,6 +12,7 @@
 @property(readwrite, nonatomic) CGFloat gamma;
 @property(readwrite, nonatomic) CGFloat baseMask;
 @property(readwrite, nonatomic) CGFloat waterAmount;
+@property(strong, nonatomic) GPUImageFramebuffer *renderFramebuffer;
 
 - (void)setMiscFramebuffer:(GPUImageFramebuffer *)miscFramebuffer waterSurfaceFramebuffer:(GPUImageFramebuffer *)waterSurfaceFramebuffer;
 

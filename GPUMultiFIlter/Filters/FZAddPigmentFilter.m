@@ -63,8 +63,12 @@
 - (void)renderToTextureWithVertices:(const GLfloat *)vertices textureCoordinates:(const GLfloat *)textureCoordinates
 {
     [GPUImageContext setActiveShaderProgram:filterProgram];
-    // TODO: ping pong
-    outputFramebuffer = [[GPUImageContext sharedFramebufferCache] fetchFramebufferForSize:[self sizeOfFBO] textureOptions:self.outputTextureOptions onlyTexture:NO];
+    if (self.renderFramebuffer)
+    {
+        outputFramebuffer=self.renderFramebuffer;
+    }else{
+        outputFramebuffer = [[GPUImageContext sharedFramebufferCache] fetchFramebufferForSize:[self sizeOfFBO] textureOptions:self.outputTextureOptions onlyTexture:NO];
+    }
     [outputFramebuffer activateFramebuffer];
 
     [self setUniformsForProgramAtIndex:0];

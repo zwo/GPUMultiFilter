@@ -9,5 +9,5 @@
 #import <GPUImage/GPUImage.h>
 
 @interface FZGapFilter : GPUImageFilter
-
+- (void)set GrainFramebuffer:(GPUImageFramebuffer *)GrainFramebuffer alumFramebuffer:(GPUImageFramebuffer *)AlumFramebuffer pinningFramebuffer:(GPUImageFramebuffer *)PinningFramebuffer;
 @end

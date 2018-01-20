@@ -11,5 +11,6 @@
 @interface FZAddPigmentFilter : GPUImageFilter
 @property(readwrite, nonatomic) CGFloat gamma;
 @property(readwrite, nonatomic) CGFloat baseMask;
+@property(strong, nonatomic) GPUImageFramebuffer *renderFramebuffer;
 - (void)setSurfInkFramebuffer:(GPUImageFramebuffer *)surfInkFramebuffer waterSurfaceFramebuffer:(GPUImageFramebuffer *)waterSurfaceFramebuffer miscFramebuffer:(GPUImageFramebuffer *)miscFramebuffer;
 @end
