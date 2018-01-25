@@ -10,21 +10,21 @@
 
 @implementation FZBlockFilter
 {
-	GLint _A0Uniform;
-	GLint _advect_pUniform;
-	GLint _toe_pUniform;
-	GLint _OmegaUniform;
-	GLint _Corn_mulUniform;
-	GLint _offsetUniform;
-	GLint _Blk_1Uniform;
-	GLint _Blk_2Uniform;
-	GLint _Pin_wUniform;
+	GLuint _A0Uniform;
+	GLuint _advect_pUniform;
+	GLuint _toe_pUniform;
+	GLuint _OmegaUniform;
+	GLuint _Corn_mulUniform;
+	GLuint _offsetUniform;
+	GLuint _Blk_1Uniform;
+	GLuint _Blk_2Uniform;
+	GLuint _Pin_wUniform;
 
-	GLint _MiscMapUniform;
-	GLint _VelDenMapUniform;
-	GLint _FlowInkMapUniform;
-	GLint _FixInkMapUniform;
-	GLint _DisorderMapUniform;
+	GLuint _MiscMapUniform;
+	GLuint _VelDenMapUniform;
+	GLuint _FlowInkMapUniform;
+	GLuint _FixInkMapUniform;
+	GLuint _DisorderMapUniform;
 
 	GPUImageFramebuffer *_MiscMapFramebuffer;
 	GPUImageFramebuffer *_VelDenMapFramebuffer;
@@ -127,8 +127,8 @@
 
 - (void)setBLK2comp0:(CGFloat)comp0 comp1:(CGFloat)comp1
 {
-	GPUVector2 Blk_2 = {comp0, comp1};    
-    [self setVec2:Blk_2 forUniform:_Blk_2Uniform program:filterProgram];
+	CGSize Blk_2 = CGSizeMake(comp0, comp1);
+    [self setSize:Blk_2 forUniform:_Blk_2Uniform program:filterProgram];
 }
 
 - (void)renderToTextureWithVertices:(const GLfloat *)vertices textureCoordinates:(const GLfloat *)textureCoordinates

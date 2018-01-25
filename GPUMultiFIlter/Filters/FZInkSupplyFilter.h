@@ -9,5 +9,6 @@
 #import <GPUImage/GPUImage.h>
 
 @interface FZInkSupplyFilter : GPUImageFilter
-
+@property(strong, nonatomic) GPUImageFramebuffer *renderFramebuffer;
+- (void)setVelDenMap:(GPUImageFramebuffer *)VelDenMapFramebuffer surfInkMap:(GPUImageFramebuffer *)SurfInkMapFramebuffer miscMap:(GPUImageFramebuffer *)MiscMapFramebuffer;
 @end

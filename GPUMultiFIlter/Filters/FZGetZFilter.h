@@ -9,5 +9,6 @@
 #import <GPUImage/GPUImage.h>
 
 @interface FZGetZFilter : GPUImageFilter
-
+@property(strong, nonatomic) GPUImageFramebuffer *renderFramebuffer;
+- (void)setSourceFramebuffer:(GPUImageFramebuffer *)framebuffer;
 @end

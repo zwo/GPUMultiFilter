@@ -10,11 +10,11 @@
 
 @implementation FZAddWaterFilter
 {
-    GLint _gammaUniform;
-    GLint _baseMaskUniform;
-    GLint _waterAmountUniform;
-    GLint _miscTextureUniform;
-    GLint _waterSurfaceTextureUniform;
+    GLuint _gammaUniform;
+    GLuint _baseMaskUniform;
+    GLuint _waterAmountUniform;
+    GLuint _miscTextureUniform;
+    GLuint _waterSurfaceTextureUniform;
     GPUImageFramebuffer *_miscFramebuffer;
     GPUImageFramebuffer *_waterSurfaceFramebuffer;
 }

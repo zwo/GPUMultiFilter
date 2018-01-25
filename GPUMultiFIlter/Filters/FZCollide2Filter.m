@@ -10,15 +10,15 @@
 
 @implementation FZCollide2Filter
 {
-	GLint _AUniform;
-	GLint _BUniform;
-	GLint _CUniform;
-	GLint _DUniform;
-	GLint _advect_pUniform;
-	GLint _OmegaUniform;
-	GLint _VelDenMapUniform;
-	GLint _Dist2MapUniform;
-	GLint _InkMapUniform;
+	GLuint _AUniform;
+	GLuint _BUniform;
+	GLuint _CUniform;
+	GLuint _DUniform;
+	GLuint _advect_pUniform;
+	GLuint _OmegaUniform;
+	GLuint _VelDenMapUniform;
+	GLuint _Dist2MapUniform;
+	GLuint _InkMapUniform;
 	GPUImageFramebuffer *_VelDenMapFramebuffer;
 	GPUImageFramebuffer *_Dist2MapFramebuffer;
 	GPUImageFramebuffer *_InkMapFramebuffer;
@@ -51,7 +51,7 @@
 - (void)setVelDenMapFramebuffer:(GPUImageFramebuffer *)VelDenMapFramebuffer dist2MapFramebuffer:(GPUImageFramebuffer *)Dist2MapFramebuffer inkMapFramebuffer:(GPUImageFramebuffer *)InkMapFramebuffer
 {
 	_VelDenMapFramebuffer=VelDenMapFramebuffer;
-	_Dist1MapFramebuffer=Dist2MapFramebuffer;
+	_Dist2MapFramebuffer=Dist2MapFramebuffer;
 	_InkMapFramebuffer=InkMapFramebuffer;
 	[_VelDenMapFramebuffer lock];
 	[_Dist2MapFramebuffer lock];

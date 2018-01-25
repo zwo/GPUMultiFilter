@@ -30,6 +30,9 @@
     [super viewDidLoad];
     // _imageTexture=[[FZTexture alloc] initWithImage:[UIImage imageNamed:@"3.jpg"]];
     self.currentLos=-1.0;
+    int num_texture_units;
+    glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &num_texture_units);
+    NSLog(@"max texture %zd",num_texture_units);
 }
 
 - (void)startDraw

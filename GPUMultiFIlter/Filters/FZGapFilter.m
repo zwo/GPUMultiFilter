@@ -10,9 +10,9 @@
 
 @implementation FZGapFilter
 {
-	GLint _GrainTextureUniform;
-	GLint _AlumTextureUniform;
-	GLint _PinningTextureUniform;
+	GLuint _GrainTextureUniform;
+	GLuint _AlumTextureUniform;
+	GLuint _PinningTextureUniform;
 	GPUImageFramebuffer *_GrainFramebuffer;
 	GPUImageFramebuffer *_AlumFramebuffer;
 	GPUImageFramebuffer *_PinningFramebuffer;
@@ -26,14 +26,14 @@
     {
         return nil;
     }
-	_GrainFramebuffer=[filterProgram uniformIndex:@"Grain"];
-	_AlumFramebuffer=[filterProgram uniformIndex:@"Alum"];
-	_PinningFramebuffer=[filterProgram uniformIndex:@"Pinning"];
+	_GrainTextureUniform=[filterProgram uniformIndex:@"Grain"];
+	_AlumTextureUniform=[filterProgram uniformIndex:@"Alum"];
+	_PinningTextureUniform=[filterProgram uniformIndex:@"Pinning"];
 
     return self;
 }
 
-- (void)set GrainFramebuffer:(GPUImageFramebuffer *)GrainFramebuffer alumFramebuffer:(GPUImageFramebuffer *)AlumFramebuffer pinningFramebuffer:(GPUImageFramebuffer *)PinningFramebuffer
+- (void)setGrainFramebuffer:(GPUImageFramebuffer *)GrainFramebuffer alumFramebuffer:(GPUImageFramebuffer *)AlumFramebuffer pinningFramebuffer:(GPUImageFramebuffer *)PinningFramebuffer
 {
 	_GrainFramebuffer=GrainFramebuffer;
 	_AlumFramebuffer=AlumFramebuffer;

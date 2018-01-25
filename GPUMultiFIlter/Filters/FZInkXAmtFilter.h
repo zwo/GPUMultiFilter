@@ -9,5 +9,7 @@
 #import <GPUImage/GPUImage.h>
 
 @interface FZInkXAmtFilter : GPUImageFilter
-
+@property(strong, nonatomic) GPUImageFramebuffer *renderFramebuffer;
+- (void)setFixRateComp0:(CGFloat)comp0 comp1:(CGFloat)comp1 comp2:(CGFloat)comp2;
+- (void)setVelDenMapFramebuffer:(GPUImageFramebuffer *)VelDenMapFramebuffer miscMapFramebuffer:(GPUImageFramebuffer *)MiscMapFramebuffer flowInkMapFramebuffer:(GPUImageFramebuffer *)FlowInkMapFramebuffer fixInkMapFramebuffer:(GPUImageFramebuffer *)FixInkMapFramebuffer;
 @end

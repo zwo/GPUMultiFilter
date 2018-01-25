@@ -10,11 +10,11 @@
 
 @implementation FZAddPigmentFilter
 {
-    GLint _surfInkTextureUniform;
-    GLint _waterSurfaceTextureUniform;
-    GLint _miscInkTextureUniform;
-    GLint _gammaUniform;
-    GLint _baseMaskUniform;
+    GLuint _surfInkTextureUniform;
+    GLuint _waterSurfaceTextureUniform;
+    GLuint _miscInkTextureUniform;
+    GLuint _gammaUniform;
+    GLuint _baseMaskUniform;
     GPUImageFramebuffer *_surfInkFramebuffer;
     GPUImageFramebuffer *_waterSurfaceFramebuffer;
     GPUImageFramebuffer *_miscFramebuffer;

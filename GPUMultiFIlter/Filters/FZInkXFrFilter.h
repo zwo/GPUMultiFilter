@@ -9,5 +9,6 @@
 #import <GPUImage/GPUImage.h>
 
 @interface FZInkXFrFilter : GPUImageFilter
-
+@property(strong, nonatomic) GPUImageFramebuffer *renderFramebuffer;
+- (void)setFlowInkMapFramebuffer:(GPUImageFramebuffer *)FlowInkMapFramebuffer sinkInkMapFramebuffer:(GPUImageFramebuffer *)SinkInkMapFramebuffer;
 @end
