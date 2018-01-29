@@ -50,9 +50,9 @@
 
 - (void)setFixInkMapFramebuffer:(GPUImageFramebuffer *)FixInkMapFramebuffer sinkInkMapFramebuffer:(GPUImageFramebuffer *)SinkInkMapFramebuffer velDenFramebuffer:(GPUImageFramebuffer *)velDenFramebuffer
 {
-	_FixInkMapFramebuffer=_FixInkMapFramebuffer;
-	_SinkInkMapFramebuffer=_SinkInkMapFramebuffer;
-	_velDenFramebuffer=_velDenFramebuffer;
+	_FixInkMapFramebuffer=FixInkMapFramebuffer;
+	_SinkInkMapFramebuffer=SinkInkMapFramebuffer;
+	_velDenFramebuffer=velDenFramebuffer;
 
 	[_FixInkMapFramebuffer lock];
 	[_SinkInkMapFramebuffer lock];

@@ -12,5 +12,5 @@
 @property(readwrite, nonatomic) CGSize offset;
 @property(readwrite, nonatomic) CGFloat evapor_b;
 @property(strong, nonatomic) GPUImageFramebuffer *renderFramebuffer;
-- (void)setMiscMapFramebuffer:(GPUImageFramebuffer *)MiscMapFramebuffer dist1MapFramebuffer:(GPUImageFramebuffer *)Dist2MapFramebuffer;
+- (void)setMiscMapFramebuffer:(GPUImageFramebuffer *)MiscMapFramebuffer dist2MapFramebuffer:(GPUImageFramebuffer *)Dist2MapFramebuffer;
 @end
