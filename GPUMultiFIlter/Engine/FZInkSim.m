@@ -7,15 +7,69 @@
 //
 
 #import "FZInkSim.h"
+#import "FZGapFilter.h"
+#import "FZAddPigmentFilter.h"
+#import "FZAddWaterFilter.h"
+#import "FZBlockFilter.h"
+#import "FZCollide1Filter.h"
+#import "FZCollide2Filter.h"
+#import "FZStream1Filter.h"
+#import "FZStream2Filter.h"
+#import "FZGetVelDenFilter.h"
+#import "FZInkSupplyFilter.h"
+#import "FZInkXAmtFilter.h"
+#import "FZInkXToFilter.h"
+#import "FZInkXFrFilter.h"
+#import "FZInkFlowFilter.h"
+#import "FZGetXYZFilter.h"
+#import "FZGetZFilter.h"
+
+@interface FZInkSim ()
+@property (strong, nonatomic) CADisplayLink *displayLink;
+@property (strong, nonatomic) FZTexture *grainTexture;
+@property (strong, nonatomic) FZTexture *alumTexture;
+@property (strong, nonatomic) FZTexture *pinningTexture;
+
+@property (strong, nonatomic) FZFramebuffer *fboDepositionBuffer;
+@property (strong, nonatomic) FZFramebuffer *fboDisorder;
+
+@property (strong, nonatomic) FZFramebufferPingPong *miscPP;
+@property (strong, nonatomic) FZFramebufferPingPong *velDenPP;
+@property (strong, nonatomic) FZFramebufferPingPong *dist1PP;
+@property (strong, nonatomic) FZFramebufferPingPong *dist2PP;
+@property (strong, nonatomic) FZFramebufferPingPong *surfInkPP;
+@property (strong, nonatomic) FZFramebufferPingPong *flowInkPP;
+@property (strong, nonatomic) FZFramebufferPingPong *fixInkPP;
+@property (strong, nonatomic) FZFramebufferPingPong *sinkInkPP;
+
+@property (strong, nonatomic) FZGapFilter *gapFilter;
+@property (strong, nonatomic) FZAddPigmentFilter *addPigmentFilter;
+@property (strong, nonatomic) FZAddWaterFilter *addWaterFilter;
+@property (strong, nonatomic) FZBlockFilter *blockFilter;
+@property (strong, nonatomic) FZCollide1Filter *collide1Filter;
+@property (strong, nonatomic) FZCollide2Filter *collide2Filter;
+@property (strong, nonatomic) FZStream1Filter *stream1Filter;
+@property (strong, nonatomic) FZStream2Filter *stream2Filter;
+@property (strong, nonatomic) FZGetVelDenFilter *getVelDenFilter;
+@property (strong, nonatomic) FZInkSupplyFilter *inkSupplyFilter;
+@property (strong, nonatomic) FZInkXAmtFilter *inkXAmtFilter;
+@property (strong, nonatomic) FZInkXToFilter *inkXToFilter;
+@property (strong, nonatomic) FZInkXFrFilter *inkXFrFilter;
+@property (strong, nonatomic) FZInkFlowFilter *inkFlowFilter;
+@property (strong, nonatomic) FZGetXYZFilter *getXYZFilter;
+@property (strong, nonatomic) FZGetZFilter *getZFilter;
+@end
 
 @implementation FZInkSim
 
-- (instancetype)init
+- (instancetype)initWithRenderView:(GPUImageView *)renderView
 {
     self=[super init];
     if (self) {
         restoreToSystemDefaults(self.uniformInfos);
         self.drawMode=FZDrawModeInkFix;
+        [self setup];
+        self.renderView=renderView;
     }
     return self;
 }
@@ -45,6 +99,30 @@ void restoreToSystemDefaults(FZUniformInfos infos)
     infos.toe_p = 0.100000001;
     infos.waterAmount = 1.000000000;
     infos.wf_mul = 1.0f;
+}
+
+- (void)setup
+{
+    _grainTexture=[[FZTexture alloc] initWithImage:[UIImage imageNamed:@"grain.jpg"]];
+    _alumTexture=[[FZTexture alloc] initWithImage:[UIImage imageNamed:@"alum3"]];
+    _pinningTexture=[[FZTexture alloc] initWithImage:[UIImage imageNamed:@"pinning"]];
+    
+    self.gapFilter=[[FZGapFilter alloc] init];
+    self.addPigmentFilter=[[FZAddPigmentFilter alloc] init];
+    self.addWaterFilter=[[FZAddWaterFilter alloc] init];
+    self.blockFilter=[[FZBlockFilter alloc] init];
+    self.collide1Filter=[[FZCollide1Filter alloc] init];
+    self.collide2Filter=[[FZCollide2Filter alloc] init];
+    self.stream1Filter=[[FZStream1Filter alloc] init];
+    self.stream2Filter=[[FZStream2Filter alloc] init];
+    self.getVelDenFilter=[[FZGetVelDenFilter alloc] init];
+    self.inkSupplyFilter=[[FZInkSupplyFilter alloc] init];
+    self.inkXAmtFilter=[[FZInkXAmtFilter alloc] init];
+    self.inkXToFilter=[[FZInkXToFilter alloc] init];
+    self.inkXFrFilter=[[FZInkXFrFilter alloc] init];
+    self.inkFlowFilter=[[FZInkFlowFilter alloc] init];
+    self.getXYZFilter=[[FZGetXYZFilter alloc] init];
+    self.getZFilter=[[FZGetZFilter alloc] init];
 }
 
 @end

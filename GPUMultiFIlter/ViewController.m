@@ -14,48 +14,53 @@
 #import "FZFramebuffer.h"
 #import "TestDraw.h"
 #import "FZFramebufferPingPong.h"
+
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet GPUImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIImageView *testImageView;
 @property (strong, nonatomic) CADisplayLink *displayLink;
-@property (strong, nonatomic) FZTexture *imageTexture;
-@property (strong, nonatomic) NSTimer *timer;
-@property (assign, nonatomic) CGFloat currentLos;
+@property (strong, nonatomic) FZTexture *grainTexture;
+@property (strong, nonatomic) FZTexture *alumTexture;
+@property (strong, nonatomic) FZTexture *pinningTexture;
+@property (strong, nonatomic) FZTexture *brushTexture;
 @property (strong, nonatomic) FZFramebufferPingPong *fboPingPong;
+
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // _imageTexture=[[FZTexture alloc] initWithImage:[UIImage imageNamed:@"3.jpg"]];
-    self.currentLos=-1.0;
     int num_texture_units;
     glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &num_texture_units);
     NSLog(@"max texture %zd",num_texture_units);
+}
+
+- (void)setup
+{
+    _grainTexture=[[FZTexture alloc] initWithImage:[UIImage imageNamed:@"grain.jpg"]];
+    _alumTexture=[[FZTexture alloc] initWithImage:[UIImage imageNamed:@"alum3"]];
+    _pinningTexture=[[FZTexture alloc] initWithImage:[UIImage imageNamed:@"pinning"]];
+    _brushTexture=[[FZTexture alloc] initWithImage:[UIImage imageNamed:@"test2"]];
 }
 
 - (void)startDraw
 {
     // 一定要放主线程否则运行一次后就停止了
     runOnMainQueueWithoutDeadlocking(^{
-        _timer=[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(drawFrame) userInfo:nil repeats:YES];
-        [_timer fire];
+        if (self.displayLink == nil) {
+            self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(drawFrame)];
+            self.displayLink.frameInterval=3;
+            [self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+        }
     });
 }
 
 - (void)stopDraw
 {
-    [_timer invalidate];
-    _timer=nil;
+    [self.displayLink invalidate];
+    self.displayLink = nil;
     _fboPingPong=nil;
-    _currentLos=0.0;
-}
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (IBAction)onButtonProcess:(id)sender {
@@ -82,17 +87,10 @@
 
 - (void)drawFrame
 {
-    if (self.currentLos>1.0) {
-        [self stopDraw];
-        return;
-    }
     runAsynchronouslyOnVideoProcessingQueue(^{
-        NSLog(@"%f",self.currentLos);
         FZFramebuffer *fboRead=[self.fboPingPong getOldFbo];
         FZFramebuffer *fboWrite=[self.fboPingPong getNewFbo];
         FilterLine *filter=[FilterLine new];
-        filter.pos=self.currentLos;
-        self.currentLos += 0.1;
         [filter addTarget:fboWrite];
         [fboWrite addTarget:self.imageView];
         [fboRead feedFramebufferToFilter:filter];

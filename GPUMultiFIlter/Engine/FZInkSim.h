@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <GPUImage/GPUImage.h>
+#import "FZTexture.h"
+#import "FZFramebuffer.h"
+#import "FZFramebufferPingPong.h"
 typedef struct fzuniformInfos
 {
     float brushsize;
@@ -43,6 +46,8 @@ typedef NS_ENUM(NSUInteger, FZDrawMode) {
 };
 
 @interface FZInkSim : NSObject
+- (instancetype)initWithRenderView:(GPUImageView *)renderView;
+@property (strong, nonatomic) GPUImageView *renderView;
 @property (assign, nonatomic) FZUniformInfos uniformInfos;
 @property (assign, nonatomic) FZDrawMode drawMode;
 @end
