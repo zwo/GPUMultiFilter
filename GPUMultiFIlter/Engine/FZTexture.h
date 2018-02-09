@@ -9,6 +9,7 @@
 #import <GPUImage/GPUImage.h>
 
 @interface FZTexture : NSObject
+@property (strong, nonatomic) GPUImageFramebuffer *outputFramebuffer;
 @property (assign, nonatomic, readonly) CGSize texturePixelSize;
 - (instancetype)initWithImage:(UIImage *)image;
 - (void)processTextureToFilter:(id<GPUImageInput>)filter;

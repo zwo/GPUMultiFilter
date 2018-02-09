@@ -11,6 +11,7 @@
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 @interface FZFramebuffer : NSObject <GPUImageInput>
+@property (strong, nonatomic) GPUImageFramebuffer *outputFramebuffer;
 @property (assign, nonatomic, readonly) CGSize texturePixelSize;
 - (instancetype)initWithSize:(CGSize)size;
 - (instancetype)initWithSize:(CGSize)size textureOptions:(GPUTextureOptions)fboTextureOptions;

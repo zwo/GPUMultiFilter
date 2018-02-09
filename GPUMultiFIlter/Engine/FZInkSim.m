@@ -68,7 +68,6 @@
     if (self) {
         restoreToSystemDefaults(self.uniformInfos);
         self.drawMode=FZDrawModeInkFix;
-        [self setup];
         self.renderView=renderView;
     }
     return self;
@@ -101,8 +100,12 @@ void restoreToSystemDefaults(FZUniformInfos infos)
     infos.wf_mul = 1.0f;
 }
 
-- (void)setup
+- (void)setupWithSize:(CGSize)size
 {
+    if (CGSizeEqualToSize(size, self.size)) {
+        return;
+    }
+    self.size=size;
     _grainTexture=[[FZTexture alloc] initWithImage:[UIImage imageNamed:@"grain.jpg"]];
     _alumTexture=[[FZTexture alloc] initWithImage:[UIImage imageNamed:@"alum3"]];
     _pinningTexture=[[FZTexture alloc] initWithImage:[UIImage imageNamed:@"pinning"]];
@@ -123,6 +126,41 @@ void restoreToSystemDefaults(FZUniformInfos infos)
     self.inkFlowFilter=[[FZInkFlowFilter alloc] init];
     self.getXYZFilter=[[FZGetXYZFilter alloc] init];
     self.getZFilter=[[FZGetZFilter alloc] init];
+    
+    self.fboDepositionBuffer=[[FZFramebuffer alloc] initWithSize:size];
+    self.fboDisorder=[[FZFramebuffer alloc] initWithSize:size];
+    
+    self.miscPP=[[FZFramebufferPingPong alloc] initWithSize:size];
+    self.velDenPP=[[FZFramebufferPingPong alloc] initWithSize:size];
+    self.dist1PP=[[FZFramebufferPingPong alloc] initWithSize:size];
+    self.dist2PP=[[FZFramebufferPingPong alloc] initWithSize:size];
+    self.surfInkPP=[[FZFramebufferPingPong alloc] initWithSize:size];
+    self.flowInkPP=[[FZFramebufferPingPong alloc] initWithSize:size];
+    self.fixInkPP=[[FZFramebufferPingPong alloc] initWithSize:size];
+    self.sinkInkPP=[[FZFramebufferPingPong alloc] initWithSize:size];
+    
+    [self.fboDepositionBuffer clear];
+    [self.fboDisorder clear];
+}
+
+- (void)fillDisorderBuffer
+{
+    self.gapFilter.renderFramebuffer=self.fboDisorder.outputFramebuffer;
+    [self.gapFilter setGrainFramebuffer:_grainTexture.outputFramebuffer alumFramebuffer:_alumTexture.outputFramebuffer pinningFramebuffer:_pinningTexture.outputFramebuffer];
+    [self.gapFilter newFrameReadyAtTime:kCMTimeIndefinite atIndex:0];
+}
+
+- (void)update
+{
+    glDisable(GL_BLEND);
+    
+    
+}
+
+- (void)draw
+{
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 @end

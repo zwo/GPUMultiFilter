@@ -10,7 +10,6 @@
 
 @interface FZTexture ()
 @property (strong, nonatomic) dispatch_semaphore_t imageUpdateSemaphore;
-@property (strong, nonatomic) GPUImageFramebuffer *outputFramebuffer;
 @end
 
 @implementation FZTexture

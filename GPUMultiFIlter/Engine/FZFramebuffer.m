@@ -10,7 +10,6 @@
 #import "TestDraw.h"
 #import "FZPassthroughFilter.h"
 @interface FZFramebuffer ()
-@property (strong, nonatomic) GPUImageFramebuffer *outputFramebuffer;
 @property (strong, nonatomic) GPUImageFramebuffer *inputFramebuffer;
 @property (assign, nonatomic) GLuint framebufferForDrawing;
 @property (assign, nonatomic) GLuint colorRenderbufferForDrawing;
