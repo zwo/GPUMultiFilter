@@ -1,0 +1,40 @@
+Q: How to use FZFramebufferPingPong
+1. get fbo -> FZFramebuffer *fbo=[self.fboPingPong getNewFbo];
+2. draw and swap -> [picture addTarget:fbo]; ... [self.fboPingPong swap];
+
+Q: How to swap FZFramebufferPingPong
+1. Get old -> FZFramebuffer *fboRead=[self.fboPingPong getOldFbo];
+2. Get new -> FZFramebuffer *fboWrite=[self.fboPingPong getNewFbo];
+3. Draw
+FilterLine *filter=[FilterLine new];
+filter.pos=self.currentLos;
+self.currentLos += 0.1;
+[filter addTarget:fboWrite];
+[fboWrite addTarget:self.imageView];
+[fboRead feedFramebufferToFilter:filter];
+4. swap
+[self.fboPingPong swap];
+Ref: https://github.com/zwo/GPUMultiFilter/blob/d68035d5c43b6439350eb487c590002781107878/GPUMultiFIlter/ViewController.m
+
+Q: How to use FZFramebuffer
+FZFramebuffer *fbo=[[FZFramebuffer alloc] initWithSize:CGSizeMake(261,172)];
+[fbo beginDrawingWithRenderbufferSize:CGSizeMake(261, 172)];
+[TestDraw drawRect];
+[fbo endDrawing];
+[fbo feedFramebufferToFilter:self.imageView];
+https://github.com/zwo/GPUMultiFilter/blob/draw-chain/GPUMultiFIlter/ViewController.m
+
+Q: Do I need to clear when initialize fboPingpong?
+Yes.
+
+Q: What does update do?
+1. use block filter to filter some fboPingpong's old tex to misc's new tex and swap
+2.etc
+
+Q: How to set offset?
+
+Q: How to set thread, i.e. runAysnOnVideo...
+After process method, opengl related.
+
+Q: Is it OK to addTarget each process?
+OK, if contain the same target, method will return.

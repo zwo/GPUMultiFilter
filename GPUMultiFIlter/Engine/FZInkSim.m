@@ -141,6 +141,8 @@ void restoreToSystemDefaults(FZUniformInfos infos)
     
     [self.fboDepositionBuffer clear];
     [self.fboDisorder clear];
+    
+    [self fillDisorderBuffer];
 }
 
 - (void)fillDisorderBuffer
@@ -152,15 +154,96 @@ void restoreToSystemDefaults(FZUniformInfos infos)
 
 - (void)update
 {
-    glDisable(GL_BLEND);
-    
-    
+    runAsynchronouslyOnVideoProcessingQueue(^{
+        glDisable(GL_BLEND);
+        FZUniformInfos uniforms=self.uniformInfos;
+        
+        self.blockFilter.renderFramebuffer=[self.miscPP getNewFbo].outputFramebuffer;
+        self.blockFilter.advect_p=uniforms.advect_p;
+        self.blockFilter.toe_p=uniforms.toe_p;
+        self.blockFilter.Omega=uniforms.omega;
+        self.blockFilter.offset=CGSizeMake(1/self.size.width, 1/self.size.height);
+        [self.blockFilter setBLK1comp0:uniforms.b11 comp1:uniforms.b12 comp2:uniforms.b13];
+        [self.blockFilter setBLK2comp0:uniforms.b21 comp1:uniforms.b22];
+        [self.blockFilter setPin_Wcomp0:uniforms.p1 comp1:uniforms.p2 comp2:uniforms.p3];
+        [self.blockFilter setMiscMapFramebuffer:self.miscPP.getOldFbo.outputFramebuffer velDenMapFramebuffer:self.velDenPP.getOldFbo.outputFramebuffer flowInkMapFramebuffer:self.flowInkPP.getOldFbo.outputFramebuffer fixInkMapFramebuffer:self.fixInkPP.getOldFbo.outputFramebuffer disorderMapFramebuffer:self.fboDisorder.outputFramebuffer];
+        [self.blockFilter newFrameReadyAtTime:kCMTimeIndefinite atIndex:0];
+        [self.miscPP swap];
+        
+        self.collide1Filter.renderFramebuffer=[self.dist1PP getNewFbo].outputFramebuffer;
+        self.collide1Filter.advect_p=uniforms.advect_p;
+        self.collide1Filter.omega=uniforms.omega;
+        [self.collide1Filter setVelDenMapFramebuffer:self.velDenPP.getOldFbo.outputFramebuffer dist1MapFramebuffer:self.dist1PP.getOldFbo.outputFramebuffer inkMapFramebuffer:self.flowInkPP.getOldFbo.outputFramebuffer];
+        [self.collide1Filter newFrameReadyAtTime:kCMTimeIndefinite atIndex:0];
+        [self.dist1PP swap];
+        
+        self.collide2Filter.renderFramebuffer=[self.dist2PP getNewFbo].outputFramebuffer;
+        self.collide2Filter.advect_p=uniforms.advect_p;
+        self.collide2Filter.omega=uniforms.omega;
+        [self.collide2Filter setVelDenMapFramebuffer:self.velDenPP.getOldFbo.outputFramebuffer dist2MapFramebuffer:self.dist2PP.getOldFbo.outputFramebuffer inkMapFramebuffer:self.flowInkPP.getOldFbo.outputFramebuffer];
+        [self.collide2Filter newFrameReadyAtTime:kCMTimeIndefinite atIndex:0];
+        [self.dist2PP swap];
+        
+        self.stream1Filter.renderFramebuffer=[self.dist1PP getNewFbo].outputFramebuffer;
+        self.stream1Filter.evapor_b=uniforms.evapor_b;
+        self.stream1Filter.offset=CGSizeMake(1/self.size.width, 1/self.size.height);
+        [self.stream1Filter setMiscMapFramebuffer:self.miscPP.getOldFbo.outputFramebuffer dist1MapFramebuffer:self.dist1PP.getOldFbo.outputFramebuffer];
+        [self.stream1Filter newFrameReadyAtTime:kCMTimeIndefinite atIndex:0];
+        [self.dist1PP swap];
+        
+        self.stream2Filter.renderFramebuffer=[self.dist2PP getNewFbo].outputFramebuffer;
+        self.stream2Filter.evapor_b=uniforms.evapor_b;
+        self.stream2Filter.offset=CGSizeMake(1/self.size.width, 1/self.size.height);
+        [self.stream2Filter setMiscMapFramebuffer:self.miscPP.getOldFbo.outputFramebuffer dist2MapFramebuffer:self.dist2PP.getOldFbo.outputFramebuffer];
+        [self.stream2Filter newFrameReadyAtTime:kCMTimeIndefinite atIndex:0];
+        [self.dist2PP swap];
+        
+        self.getVelDenFilter.renderFramebuffer=[self.velDenPP getNewFbo].outputFramebuffer;
+        [self.getVelDenFilter setWf_MUl:uniforms.wf_mul evapor:uniforms.evapor];
+        [self.getVelDenFilter setMiscMapFramebuffer:self.miscPP.getOldFbo.outputFramebuffer dist1MapFramebuffer:self.dist1PP.getOldFbo.outputFramebuffer dist2MapFramebuffer:self.dist2PP.getOldFbo.outputFramebuffer velDenMapFramebuffer:self.velDenPP.getOldFbo.outputFramebuffer];
+        [self.getVelDenFilter newFrameReadyAtTime:kCMTimeIndefinite atIndex:0];
+        [self.velDenPP swap];
+        
+        self.inkSupplyFilter.renderFramebuffer=[self.surfInkPP getNewFbo].outputFramebuffer;
+        [self.inkSupplyFilter setVelDenMap:self.velDenPP.getOldFbo.outputFramebuffer surfInkMap:self.surfInkPP.getOldFbo.outputFramebuffer miscMap:self.miscPP.getOldFbo.outputFramebuffer];
+        [self.inkSupplyFilter newFrameReadyAtTime:kCMTimeIndefinite atIndex:0];
+        [self.surfInkPP swap];
+        
+        self.inkXAmtFilter.renderFramebuffer=[self.sinkInkPP getNewFbo].outputFramebuffer;
+        [self.inkXAmtFilter setFixRateComp0:uniforms.f1 comp1:uniforms.f2 comp2:uniforms.f3];
+        [self.inkXAmtFilter setVelDenMapFramebuffer:self.velDenPP.getOldFbo.outputFramebuffer miscMapFramebuffer:self.miscPP.getOldFbo.outputFramebuffer flowInkMapFramebuffer:self.flowInkPP.getOldFbo.outputFramebuffer fixInkMapFramebuffer:self.fixInkPP.getOldFbo.outputFramebuffer];
+        [self.inkXAmtFilter newFrameReadyAtTime:kCMTimeIndefinite atIndex:0];
+        [self.sinkInkPP swap];
+        
+        self.inkXToFilter.renderFramebuffer=[self.fixInkPP getNewFbo].outputFramebuffer;
+        [self.inkXToFilter setFixInkMapFramebuffer:self.fixInkPP.getOldFbo.outputFramebuffer sinkInkMapFramebuffer:self.sinkInkPP.getOldFbo.outputFramebuffer velDenFramebuffer:self.velDenPP.getOldFbo.outputFramebuffer];
+        [self.inkXToFilter newFrameReadyAtTime:kCMTimeIndefinite atIndex:0];
+        [self.fixInkPP swap];
+        
+        self.inkXFrFilter.renderFramebuffer=[self.flowInkPP getNewFbo].outputFramebuffer;
+        [self.inkXFrFilter setFlowInkMapFramebuffer:self.flowInkPP.getOldFbo.outputFramebuffer sinkInkMapFramebuffer:self.sinkInkPP.getOldFbo.outputFramebuffer];
+        [self.inkXFrFilter newFrameReadyAtTime:kCMTimeIndefinite atIndex:0];
+        [self.flowInkPP swap];
+        
+        self.inkFlowFilter.renderFramebuffer=[self.flowInkPP getNewFbo].outputFramebuffer;
+        [self.inkFlowFilter setBlk_aComp0:uniforms.ba1 comp1:uniforms.ba2];
+        self.inkFlowFilter.offset=CGSizeMake(1/self.size.width, 1/self.size.height);
+        [self.inkFlowFilter setVelDenMap:self.velDenPP.getOldFbo.outputFramebuffer miscMap:self.miscPP.getOldFbo.outputFramebuffer dist1Map:self.dist1PP.getOldFbo.outputFramebuffer dist2Map:self.dist2PP.getOldFbo.outputFramebuffer flowInkMap:self.flowInkPP.getOldFbo.outputFramebuffer surfInkMap:self.surfInkPP.getOldFbo.outputFramebuffer];
+        [self.inkFlowFilter newFrameReadyAtTime:kCMTimeIndefinite atIndex:0];
+        [self.flowInkPP swap];
+    });    
 }
 
 - (void)draw
 {
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    runAsynchronouslyOnVideoProcessingQueue(^{
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        
+        FZFramebuffer *inkFixFbo=self.fixInkPP.getOldFbo;
+        [self.getXYZFilter addTarget:self.renderView];
+        [inkFixFbo feedFramebufferToFilter:self.getXYZFilter];
+    });
 }
 
 @end

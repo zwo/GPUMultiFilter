@@ -26,6 +26,8 @@
     self.fboArray=@[fbo1,fbo2];
     self.readFboIndex=0;
     self.writeFboIndex=1;
+    [fbo1 clearRed:0.0 green:0.0 blue:0.0 alpha:0.0];
+    [fbo2 clearRed:0.0 green:0.0 blue:0.0 alpha:0.0];
     return self;
 }
 
