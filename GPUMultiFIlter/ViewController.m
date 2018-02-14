@@ -14,33 +14,22 @@
 #import "FZFramebuffer.h"
 #import "TestDraw.h"
 #import "FZFramebufferPingPong.h"
+#import "FZInkSim.h"
+#import "FZPassthroughFilter.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet GPUImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIImageView *testImageView;
 @property (strong, nonatomic) CADisplayLink *displayLink;
-@property (strong, nonatomic) FZTexture *grainTexture;
-@property (strong, nonatomic) FZTexture *alumTexture;
-@property (strong, nonatomic) FZTexture *pinningTexture;
 @property (strong, nonatomic) FZTexture *brushTexture;
 @property (strong, nonatomic) FZFramebufferPingPong *fboPingPong;
-
+@property (strong, nonatomic) FZInkSim *inkSim;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    int num_texture_units;
-    glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &num_texture_units);
-    NSLog(@"max texture %zd",num_texture_units);
-}
-
-- (void)setup
-{
-    _grainTexture=[[FZTexture alloc] initWithImage:[UIImage imageNamed:@"grain.jpg"]];
-    _alumTexture=[[FZTexture alloc] initWithImage:[UIImage imageNamed:@"alum3"]];
-    _pinningTexture=[[FZTexture alloc] initWithImage:[UIImage imageNamed:@"pinning"]];
     _brushTexture=[[FZTexture alloc] initWithImage:[UIImage imageNamed:@"test2"]];
 }
 
@@ -50,7 +39,7 @@
     runOnMainQueueWithoutDeadlocking(^{
         if (self.displayLink == nil) {
             self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(drawFrame)];
-            self.displayLink.frameInterval=3;
+            self.displayLink.frameInterval=60;
             [self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
         }
     });
@@ -87,15 +76,18 @@
 
 - (void)drawFrame
 {
-    runAsynchronouslyOnVideoProcessingQueue(^{
-        FZFramebuffer *fboRead=[self.fboPingPong getOldFbo];
-        FZFramebuffer *fboWrite=[self.fboPingPong getNewFbo];
-        FilterLine *filter=[FilterLine new];
-        [filter addTarget:fboWrite];
-        [fboWrite addTarget:self.imageView];
-        [fboRead feedFramebufferToFilter:filter];
-        [self.fboPingPong swap];
-    });
+    [self.inkSim update];
+    [self.inkSim draw];
+}
+
+- (void)viewDidLayoutSubviews
+{
+    self.inkSim=[[FZInkSim alloc] initWithRenderView:self.imageView];
+    [self.inkSim setupWithSize:self.imageView.frame.size];
+    [self.inkSim drawBlock:^(FZFramebuffer *fboDepositionBuffer) {
+        [FZPassthroughFilter renderTextureFrom:self.brushTexture.outputFramebuffer to:fboDepositionBuffer.outputFramebuffer rotation:kGPUImageNoRotation];
+    }];
+    [self startDraw];
 }
 
 @end

@@ -52,4 +52,7 @@ typedef NS_ENUM(NSUInteger, FZDrawMode) {
 @property (assign, nonatomic) FZDrawMode drawMode;
 @property (assign, nonatomic) CGSize size;
 - (void)setupWithSize:(CGSize)size;
+- (void)drawBlock:(void (^)(FZFramebuffer *fboDepositionBuffer))drawBlock;
+- (void)update;
+- (void)draw;
 @end

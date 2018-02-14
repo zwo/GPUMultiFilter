@@ -1,14 +1,14 @@
 varying highp vec2 textureCoordinate;
 
-uniform float A0;
-uniform float advect_p;
-uniform vec3 Blk_1;
-uniform vec2 Blk_2;
-uniform vec3 Pin_w;
-uniform float toe_p;
-uniform float Omega;
-uniform float Corn_mul;
-uniform vec2 offset;
+uniform mediump float A0;
+uniform mediump float advect_p;
+uniform mediump vec3 Blk_1;
+uniform mediump vec2 Blk_2;
+uniform mediump vec3 Pin_w;
+uniform mediump float toe_p;
+uniform mediump float Omega;
+uniform mediump float Corn_mul;
+uniform mediump vec2 offset;
 
 uniform sampler2D MiscMap;
 uniform sampler2D VelDenMap;
@@ -18,45 +18,45 @@ uniform sampler2D DisorderMap;
 
 void main(void){
  
- float dx = offset.s;
- float dy = offset.t;
+ mediump float dx = offset.s;
+ mediump float dy = offset.t;
  
- vec2 Tex0 = textureCoordinate;
+ highp vec2 Tex0 = textureCoordinate;
  
- vec4 TexN_NE = vec4(Tex0.x,      Tex0.y - dy, Tex0.x + dx, Tex0.y - dy);
- vec4 TexE_SE = vec4(Tex0.x + dx, Tex0.y,      Tex0.x + dx, Tex0.y + dy);
- vec4 TexW_NW = vec4(Tex0.x - dx, Tex0.y,      Tex0.x - dx, Tex0.y - dy);
- vec4 TexS_SW = vec4(Tex0.x,      Tex0.y + dy, Tex0.x - dx, Tex0.y + dy);
+ highp vec4 TexN_NE = vec4(Tex0.x,      Tex0.y - dy, Tex0.x + dx, Tex0.y - dy);
+ highp vec4 TexE_SE = vec4(Tex0.x + dx, Tex0.y,      Tex0.x + dx, Tex0.y + dy);
+ highp vec4 TexW_NW = vec4(Tex0.x - dx, Tex0.y,      Tex0.x - dx, Tex0.y - dy);
+ highp vec4 TexS_SW = vec4(Tex0.x,      Tex0.y + dy, Tex0.x - dx, Tex0.y + dy);
  
- vec4 Misc0 = texture2D(MiscMap, Tex0);
- vec4 VelDen = texture2D(VelDenMap, Tex0);
+ highp vec4 Misc0 = texture2D(MiscMap, Tex0);
+ highp vec4 VelDen = texture2D(VelDenMap, Tex0);
  
- float f0 = Misc0.y;
- float ws = Misc0.w;
- vec2 v = VelDen.xy;
- float wf = VelDen.z;
- float seep = VelDen.w;
+ mediump float f0 = Misc0.y;
+ mediump float ws = Misc0.w;
+ mediump vec2 v = VelDen.xy;
+ mediump float wf = VelDen.z;
+ mediump float seep = VelDen.w;
  
- float glue = texture2D(FlowInkMap, Tex0).w;
- float FixBlk = texture2D(FixInkMap, Tex0).w;
+ highp float glue = texture2D(FlowInkMap, Tex0).w;
+ highp float FixBlk = texture2D(FixInkMap, Tex0).w;
  
- vec4 Disorder = texture2D(DisorderMap, Tex0);
+ highp vec4 Disorder = texture2D(DisorderMap, Tex0);
  
  // Derive ad: Less advection for lower wf
- float ad = smoothstep(0.0, advect_p, wf);
+ mediump float ad = smoothstep(0.0, advect_p, wf);
  
  // Derive f0
- float f0_eq = A0 * wf - ad * (2.0 / 3.0) * dot(v, v);
+ mediump float f0_eq = A0 * wf - ad * (2.0 / 3.0) * dot(v, v);
  f0 = mix(f0, f0_eq, Omega);
  
- float GrainBlock = Disorder.x;
- float AlumBlock = Disorder.z;
- float block = Blk_1.x + dot(Blk_1.yz, vec2(GrainBlock, AlumBlock)) + dot(Blk_2.xy, vec2(glue, FixBlk));
+ mediump float GrainBlock = Disorder.x;
+ mediump float AlumBlock = Disorder.z;
+ mediump float block = Blk_1.x + dot(Blk_1.yz, vec2(GrainBlock, AlumBlock)) + dot(Blk_2.xy, vec2(glue, FixBlk));
  block = min(1.0, block);
  bool pinning = (wf == 0.0);
  
- float Pindisor = mix(Disorder.x, Disorder.w, smoothstep(0.0, toe_p, glue));
- float pin = Pin_w.x + dot(Pin_w.yz, vec2(FixBlk, Pindisor));
+ mediump float Pindisor = mix(Disorder.x, Disorder.w, smoothstep(0.0, toe_p, glue));
+ mediump float pin = Pin_w.x + dot(Pin_w.yz, vec2(FixBlk, Pindisor));
  
  pinning = (pinning) && (texture2D(VelDenMap, TexN_NE.xy).z < pin);
  pinning = (pinning) && (texture2D(VelDenMap, TexE_SE.xy).z < pin);

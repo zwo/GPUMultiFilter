@@ -246,4 +246,13 @@ void restoreToSystemDefaults(FZUniformInfos infos)
     });
 }
 
+- (void)drawBlock:(void (^)(FZFramebuffer *))drawBlock
+{
+    if (drawBlock) {
+        runAsynchronouslyOnVideoProcessingQueue(^{
+            drawBlock(self.fboDepositionBuffer);
+        });
+    }
+}
+
 @end

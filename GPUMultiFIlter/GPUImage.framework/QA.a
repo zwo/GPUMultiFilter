@@ -38,3 +38,6 @@ After process method, opengl related.
 
 Q: Is it OK to addTarget each process?
 OK, if contain the same target, method will return.
+
+Q: Simulate FillInkBuffer?
+Feed to depositbuffer -> initial -> expose -> draw
