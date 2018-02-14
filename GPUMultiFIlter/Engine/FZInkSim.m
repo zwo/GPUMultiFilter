@@ -107,8 +107,8 @@ void restoreToSystemDefaults(FZUniformInfos infos)
     }
     self.size=size;
     _grainTexture=[[FZTexture alloc] initWithImage:[UIImage imageNamed:@"grain.jpg"]];
-    _alumTexture=[[FZTexture alloc] initWithImage:[UIImage imageNamed:@"alum3"]];
-    _pinningTexture=[[FZTexture alloc] initWithImage:[UIImage imageNamed:@"pinning"]];
+    _alumTexture=[[FZTexture alloc] initWithImage:[UIImage imageNamed:@"alum3.jpg"]];
+    _pinningTexture=[[FZTexture alloc] initWithImage:[UIImage imageNamed:@"pinning.jpg"]];
     
     self.gapFilter=[[FZGapFilter alloc] init];
     self.addPigmentFilter=[[FZAddPigmentFilter alloc] init];

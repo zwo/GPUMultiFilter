@@ -11,7 +11,6 @@
 @implementation FZGetXYZFilter
 {
 	GLuint _sourceTextureUniform;
-	GPUImageFramebuffer *_sourceFramebuffer;
 }
 
 - (instancetype)init
@@ -24,13 +23,6 @@
     }
     _sourceTextureUniform=[filterProgram uniformIndex:@"src"];
     return self;
-}
-
-- (void)setSourceFramebuffer:(GPUImageFramebuffer *)framebuffer
-{
-	_sourceFramebuffer=framebuffer;
-	[_sourceFramebuffer lock];
-	[self setInputSize:_sourceFramebuffer.size atIndex:0];
 }
 
 - (void)renderToTextureWithVertices:(const GLfloat *)vertices textureCoordinates:(const GLfloat *)textureCoordinates
@@ -50,7 +42,7 @@
     glClear(GL_COLOR_BUFFER_BIT);
     
 	glActiveTexture(GL_TEXTURE2);
-	glBindTexture(GL_TEXTURE_2D, [_sourceFramebuffer texture]);
+	glBindTexture(GL_TEXTURE_2D, [firstInputFramebuffer texture]);
 	glUniform1i(_sourceTextureUniform, 2);	
         
     glVertexAttribPointer(filterPositionAttribute, 2, GL_FLOAT, 0, 0, vertices);
@@ -58,7 +50,7 @@
     
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
-    [_sourceFramebuffer unlock];
+    [firstInputFramebuffer unlock];
 }
 
 @end

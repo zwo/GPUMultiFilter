@@ -62,7 +62,6 @@
 		C4C500641FF48BD7004DDC11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4C500631FF48BD7004DDC11 /* Assets.xcassets */; };
 		C4C500671FF48BD7004DDC11 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4C500651FF48BD7004DDC11 /* LaunchScreen.storyboard */; };
 		C4C5006F1FF48DBD004DDC11 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4C5006E1FF48DBD004DDC11 /* GPUImage.framework */; };
-		C4C500721FF49052004DDC11 /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C4C500711FF49052004DDC11 /* 3.jpg */; };
 		C4C500761FF49B45004DDC11 /* FilterCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C500751FF49B45004DDC11 /* FilterCircle.m */; };
 		C4C500791FF4C9D0004DDC11 /* FilterLine.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C500781FF4C9D0004DDC11 /* FilterLine.m */; };
 /* End PBXBuildFile section */
@@ -150,7 +149,6 @@
 		C4C500661FF48BD7004DDC11 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C4C500681FF48BD7004DDC11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C4C5006E1FF48DBD004DDC11 /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GPUImage.framework; sourceTree = "<group>"; };
-		C4C500711FF49052004DDC11 /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpg; sourceTree = "<group>"; };
 		C4C500741FF49B45004DDC11 /* FilterCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterCircle.h; sourceTree = "<group>"; };
 		C4C500751FF49B45004DDC11 /* FilterCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterCircle.m; sourceTree = "<group>"; };
 		C4C500771FF4C9D0004DDC11 /* FilterLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterLine.h; sourceTree = "<group>"; };
@@ -248,7 +246,6 @@
 				C46A0B6E1FFB68790055FCDC /* Shaders */,
 				C4690A621FF64525009E9600 /* Resources */,
 				C4C500731FF49AFC004DDC11 /* Filters */,
-				C4C500711FF49052004DDC11 /* 3.jpg */,
 				C4C5006E1FF48DBD004DDC11 /* GPUImage.framework */,
 				C4C5005A1FF48BD7004DDC11 /* AppDelegate.h */,
 				C4C5005B1FF48BD7004DDC11 /* AppDelegate.m */,
@@ -403,7 +400,6 @@
 				C46A0B861FFB68790055FCDC /* Gap.glsl in Resources */,
 				C46A0B8C1FFB68790055FCDC /* InkFlow.glsl in Resources */,
 				C46A0B841FFB68790055FCDC /* Collide1.glsl in Resources */,
-				C4C500721FF49052004DDC11 /* 3.jpg in Resources */,
 				C46A0B871FFB68790055FCDC /* GetVelDen.glsl in Resources */,
 				C4690A6B1FF645AE009E9600 /* alum2.jpg in Resources */,
 			);
