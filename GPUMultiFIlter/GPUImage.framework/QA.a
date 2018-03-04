@@ -24,6 +24,10 @@ FZFramebuffer *fbo=[[FZFramebuffer alloc] initWithSize:CGSizeMake(261,172)];
 [fbo feedFramebufferToFilter:self.imageView];
 https://github.com/zwo/GPUMultiFilter/blob/draw-chain/GPUMultiFIlter/ViewController.m
 
+Q: How to use FZTexture?
+FZTexture *testTexture=[[FZTexture alloc] initWithImage:[UIImage imageNamed:@"pic_community_01.jpg"]];
+[testTexture processTextureToFilter:self.getXYZFilter];
+
 Q: Do I need to clear when initialize fboPingpong?
 Yes.
 
@@ -41,3 +45,26 @@ OK, if contain the same target, method will return.
 
 Q: Simulate FillInkBuffer?
 Feed to depositbuffer -> initial -> expose -> draw
+
+Q: Draw qua diagram?
+drawArray with modified coordinate. Need to have a display framebuffer.
+
+V2:(-1,1)    V1:(1,1)
+
+
+V3:(-1,-1)   V0:(1,-1)
+
+triange: (0,1,2) (2,3,0)
+
+
+Texture
+
+(0,1)  (1,1)
+
+(0,0)  (1,0)
+
+
+Have to render 4 textures to the same framebuffer. 1. create a debug display fbo 2. debug filter to render 4 texuture to the same fbo.
+
+Q: Display on screen?
+GPUImageView: set display framebuffer, glClear, bind texture, glVertexAttribPointer for vertex and texture coord, glDrawArray, present framebuffer.

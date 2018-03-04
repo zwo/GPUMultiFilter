@@ -39,6 +39,8 @@
 		C46A0B921FFB68790055FCDC /* Stream2.glsl in Resources */ = {isa = PBXBuildFile; fileRef = C46A0B801FFB68790055FCDC /* Stream2.glsl */; };
 		C46A0B961FFB6A010055FCDC /* FZInkSim.m in Sources */ = {isa = PBXBuildFile; fileRef = C46A0B951FFB6A010055FCDC /* FZInkSim.m */; };
 		C46C5B121FFCA94E00B3F259 /* FZTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = C46C5B111FFCA94E00B3F259 /* FZTexture.m */; };
+		C49EE50D204B910F0024A4AB /* pic_community_01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C49EE50C204B910F0024A4AB /* pic_community_01.jpg */; };
+		C49EE510204BD2B70024A4AB /* FZXYZ4OutputDebugFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = C49EE50F204BD2B70024A4AB /* FZXYZ4OutputDebugFilter.m */; };
 		C4B106162011C85100162533 /* FZAddWaterFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B106152011C85100162533 /* FZAddWaterFilter.m */; };
 		C4B1062E2011F76B00162533 /* FZBlockFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B1062D2011F76B00162533 /* FZBlockFilter.m */; };
 		C4B106312011F78600162533 /* FZCollide1Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B106302011F78600162533 /* FZCollide1Filter.m */; };
@@ -106,6 +108,9 @@
 		C46A0B951FFB6A010055FCDC /* FZInkSim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZInkSim.m; sourceTree = "<group>"; };
 		C46C5B101FFCA94E00B3F259 /* FZTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FZTexture.h; sourceTree = "<group>"; };
 		C46C5B111FFCA94E00B3F259 /* FZTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZTexture.m; sourceTree = "<group>"; };
+		C49EE50C204B910F0024A4AB /* pic_community_01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic_community_01.jpg; sourceTree = "<group>"; };
+		C49EE50E204BD2B70024A4AB /* FZXYZ4OutputDebugFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FZXYZ4OutputDebugFilter.h; sourceTree = "<group>"; };
+		C49EE50F204BD2B70024A4AB /* FZXYZ4OutputDebugFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZXYZ4OutputDebugFilter.m; sourceTree = "<group>"; };
 		C4B106142011C85100162533 /* FZAddWaterFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FZAddWaterFilter.h; sourceTree = "<group>"; };
 		C4B106152011C85100162533 /* FZAddWaterFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZAddWaterFilter.m; sourceTree = "<group>"; };
 		C4B1062C2011F76B00162533 /* FZBlockFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FZBlockFilter.h; sourceTree = "<group>"; };
@@ -170,6 +175,7 @@
 		C4690A621FF64525009E9600 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C49EE50C204B910F0024A4AB /* pic_community_01.jpg */,
 				C4690A631FF645AE009E9600 /* alum.jpg */,
 				C4690A641FF645AE009E9600 /* alum2.jpg */,
 				C4690A651FF645AE009E9600 /* alum3.jpg */,
@@ -311,6 +317,8 @@
 				C4B106542011FA9C00162533 /* FZStream1Filter.m */,
 				C4B106562011FAAF00162533 /* FZStream2Filter.h */,
 				C4B106572011FAAF00162533 /* FZStream2Filter.m */,
+				C49EE50E204BD2B70024A4AB /* FZXYZ4OutputDebugFilter.h */,
+				C49EE50F204BD2B70024A4AB /* FZXYZ4OutputDebugFilter.m */,
 			);
 			path = Filters;
 			sourceTree = "<group>";
@@ -387,6 +395,7 @@
 				C4C500621FF48BD7004DDC11 /* Main.storyboard in Resources */,
 				C4690A6E1FF645AE009E9600 /* grain2.jpg in Resources */,
 				C46A0B901FFB68790055FCDC /* InkXTo.glsl in Resources */,
+				C49EE50D204B910F0024A4AB /* pic_community_01.jpg in Resources */,
 				C4690A6C1FF645AE009E9600 /* alum3.jpg in Resources */,
 				C46A0B821FFB68790055FCDC /* AddWater.glsl in Resources */,
 				C46A0B8D1FFB68790055FCDC /* InkSupply.glsl in Resources */,
@@ -434,6 +443,7 @@
 				C4C500791FF4C9D0004DDC11 /* FilterLine.m in Sources */,
 				C4C5005C1FF48BD7004DDC11 /* AppDelegate.m in Sources */,
 				C4B106372011F7DB00162533 /* FZGapFilter.m in Sources */,
+				C49EE510204BD2B70024A4AB /* FZXYZ4OutputDebugFilter.m in Sources */,
 				C4C500591FF48BD7004DDC11 /* main.m in Sources */,
 				C4B106432011F91400162533 /* FZInkFlowFilter.m in Sources */,
 				C4B106582011FAAF00162533 /* FZStream2Filter.m in Sources */,

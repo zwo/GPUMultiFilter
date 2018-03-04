@@ -31,6 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _brushTexture=[[FZTexture alloc] initWithImage:[UIImage imageNamed:@"test2"]];
+    self.imageView.fillMode=kGPUImageFillModeStretch;
 }
 
 - (void)startDraw

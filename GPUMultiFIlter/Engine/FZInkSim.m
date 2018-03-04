@@ -23,7 +23,7 @@
 #import "FZInkFlowFilter.h"
 #import "FZGetXYZFilter.h"
 #import "FZGetZFilter.h"
-
+#import "FZXYZ4OutputDebugFilter.h"
 @interface FZInkSim ()
 @property (strong, nonatomic) CADisplayLink *displayLink;
 @property (strong, nonatomic) FZTexture *grainTexture;
@@ -58,6 +58,8 @@
 @property (strong, nonatomic) FZInkFlowFilter *inkFlowFilter;
 @property (strong, nonatomic) FZGetXYZFilter *getXYZFilter;
 @property (strong, nonatomic) FZGetZFilter *getZFilter;
+
+@property (strong, nonatomic) FZFramebuffer *fboDebugDisplay;
 @end
 
 @implementation FZInkSim
@@ -143,6 +145,8 @@ void restoreToSystemDefaults(FZUniformInfos infos)
     [self.fboDisorder clear];
     
     [self fillDisorderBuffer];
+    
+    self.fboDebugDisplay=[[FZFramebuffer alloc] initWithSize:size];
 }
 
 - (void)fillDisorderBuffer
@@ -240,9 +244,16 @@ void restoreToSystemDefaults(FZUniformInfos infos)
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         
-        FZFramebuffer *inkFixFbo=self.fixInkPP.getOldFbo;
-        [self.getXYZFilter addTarget:self.renderView];
-        [inkFixFbo feedFramebufferToFilter:self.getXYZFilter];
+        FZTexture *testTexture=[[FZTexture alloc] initWithImage:[UIImage imageNamed:@"pic_community_01.jpg"]];
+        FZXYZ4OutputDebugFilter *debugFilter=[[FZXYZ4OutputDebugFilter alloc] init];
+        debugFilter.renderFramebuffer=self.fboDebugDisplay.outputFramebuffer;
+        [debugFilter begin];
+        [debugFilter renderFramebuffer:testTexture.outputFramebuffer toGuadrant:1];
+        [debugFilter renderFramebuffer:_grainTexture.outputFramebuffer toGuadrant:2];
+        [debugFilter renderFramebuffer:_alumTexture.outputFramebuffer toGuadrant:3];
+        [debugFilter renderFramebuffer:_pinningTexture.outputFramebuffer toGuadrant:4];
+        [debugFilter end];
+        [self.fboDebugDisplay feedFramebufferToFilter:self.renderView];
     });
 }
 
