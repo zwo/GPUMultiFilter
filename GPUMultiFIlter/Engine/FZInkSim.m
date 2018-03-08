@@ -275,24 +275,25 @@ void restoreToSystemDefaults(FZUniformInfos infos)
 {
     glEnable(GL_BLEND);
     glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);//OF_BLENDMODE_SCREEN
-    /*
-    self.addPigmentFilter.renderFramebuffer=[self.surfInkPP getNewFbo].outputFramebuffer;
-    self.addPigmentFilter.gamma=self.uniformInfos.gamma;
-    self.addPigmentFilter.baseMask=self.uniformInfos.baseMask;
-    [self.addPigmentFilter setSurfInkFramebuffer:[self.surfInkPP getOldFbo].outputFramebuffer waterSurfaceFramebuffer:self.fboDepositionBuffer.outputFramebuffer miscFramebuffer:[self.miscPP getOldFbo].outputFramebuffer];
-    [self.addPigmentFilter newFrameReadyAtTime:kCMTimeIndefinite atIndex:0];
-    [self.surfInkPP swap];
     
-    self.addWaterFilter.renderFramebuffer=[self.miscPP getNewFbo].outputFramebuffer;
-    self.addWaterFilter.gamma=self.uniformInfos.gamma;
-    self.addWaterFilter.baseMask=self.uniformInfos.baseMask;
-    self.addWaterFilter.waterAmount=self.uniformInfos.waterAmount;
-    [self.addWaterFilter setMiscFramebuffer:[self.miscPP getOldFbo].outputFramebuffer waterSurfaceFramebuffer:self.fboDepositionBuffer.outputFramebuffer];
-    [self.addWaterFilter newFrameReadyAtTime:kCMTimeIndefinite atIndex:0];
-    [self.miscPP swap];
-    */
+//    self.addPigmentFilter.renderFramebuffer=[self.surfInkPP getNewFbo].outputFramebuffer;
+//    self.addPigmentFilter.gamma=self.uniformInfos.gamma;
+//    self.addPigmentFilter.baseMask=self.uniformInfos.baseMask;
+//    [self.addPigmentFilter setSurfInkFramebuffer:[self.surfInkPP getOldFbo].outputFramebuffer waterSurfaceFramebuffer:self.fboDepositionBuffer.outputFramebuffer miscFramebuffer:[self.miscPP getOldFbo].outputFramebuffer];
+//    [self.addPigmentFilter newFrameReadyAtTime:kCMTimeIndefinite atIndex:0];
+//    [self.surfInkPP swap];
+    
+//    self.addWaterFilter.renderFramebuffer=[self.miscPP getNewFbo].outputFramebuffer;
+//    self.addWaterFilter.gamma=self.uniformInfos.gamma;
+//    self.addWaterFilter.baseMask=self.uniformInfos.baseMask;
+//    self.addWaterFilter.waterAmount=self.uniformInfos.waterAmount;
+//    [self.addWaterFilter setMiscFramebuffer:[self.miscPP getOldFbo].outputFramebuffer waterSurfaceFramebuffer:self.fboDepositionBuffer.outputFramebuffer];
+//    [self.addWaterFilter newFrameReadyAtTime:kCMTimeIndefinite atIndex:0];
+//    [self.miscPP swap];
+    
     FZPlayFilter *playFilter=[FZPlayFilter new];
     playFilter.renderFramebuffer=[self.surfInkPP getNewFbo].outputFramebuffer;
+    playFilter.pos=9.7;
     [playFilter setWaterSurfaceFramebuffer:self.fboDepositionBuffer.outputFramebuffer];
     [playFilter newFrameReadyAtTime:kCMTimeIndefinite atIndex:0];
     

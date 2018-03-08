@@ -12,6 +12,7 @@
 {
     GPUImageFramebuffer *_waterSurfaceFramebuffer;
     GLuint _waterSurfaceTextureUniform;
+    GLuint _posUniform;
 }
 
 - (instancetype)init
@@ -23,7 +24,14 @@
         return nil;
     }
     _waterSurfaceTextureUniform=[filterProgram uniformIndex:@"WaterSurface"];
+    _posUniform=[filterProgram uniformIndex:@"pos"];
     return self;
+}
+
+- (void)setPos:(CGFloat)pos
+{
+    _pos=pos;
+    [self setFloat:pos forUniform:_posUniform program:filterProgram];
 }
 
 - (void)setWaterSurfaceFramebuffer:(GPUImageFramebuffer *)waterSurfaceFramebuffer
@@ -61,5 +69,18 @@
     [_waterSurfaceFramebuffer unlock];    
 }
 
+- (void)newFrameReadyAtTime:(CMTime)frameTime atIndex:(NSInteger)textureIndex;
+{
+    static const GLfloat imageVertices[] = {
+        -1.0f, -1.0f,
+        1.0f, -1.0f,
+        -1.0f,  1.0f,
+        1.0f,  1.0f,
+    };
+    
+    [self renderToTextureWithVertices:imageVertices textureCoordinates:[[self class] textureCoordinatesForRotation:kGPUImageFlipVertical]];
+    
+    [self informTargetsAboutNewFrameAtTime:frameTime];
+}
 
 @end

@@ -10,5 +10,6 @@
 
 @interface FZPlayFilter : GPUImageFilter
 @property(strong, nonatomic) GPUImageFramebuffer *renderFramebuffer;
+@property (assign, nonatomic) CGFloat pos;
 - (void)setWaterSurfaceFramebuffer:(GPUImageFramebuffer *)waterSurfaceFramebuffer;
 @end
