@@ -55,4 +55,6 @@ typedef NS_ENUM(NSUInteger, FZDrawMode) {
 - (void)drawBlock:(void (^)(FZFramebuffer *fboDepositionBuffer))drawBlock;
 - (void)update;
 - (void)draw;
++ (UIColor *)getInkColorHueAngle:(CGFloat)hueAngle sat:(CGFloat)sat depth:(CGFloat)depth;
++ (UIColor *)getInkColorHueAngle:(CGFloat)hueAngle;
 @end

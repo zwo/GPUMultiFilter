@@ -77,18 +77,33 @@
 
 - (void)drawFrame
 {
-    [self.inkSim update];
+//    [self.inkSim update];
     [self.inkSim draw];
 }
 
-- (void)viewDidLayoutSubviews
+- (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
+    CGSize size=_imageView.frame.size;
+    CGFloat contentScale = [[UIScreen mainScreen] scale];
+    size=CGSizeMake(size.width*contentScale, size.height*contentScale);
+    glViewport(0, 0, size.width,size.height);
     self.inkSim=[[FZInkSim alloc] initWithRenderView:self.imageView];
-    [self.inkSim setupWithSize:self.imageView.frame.size];
+    [self.inkSim setupWithSize:size];
     [self.inkSim drawBlock:^(FZFramebuffer *fboDepositionBuffer) {
-        [FZPassthroughFilter renderTextureFrom:self.brushTexture.outputFramebuffer to:fboDepositionBuffer.outputFramebuffer rotation:kGPUImageNoRotation];
+        [fboDepositionBuffer beginDrawingWithRenderbufferSize:size];
+        [TestDraw drawRandomRect];
+        [fboDepositionBuffer endDrawing];
     }];
     [self startDraw];
+    
+//    runAsynchronouslyOnVideoProcessingQueue(^{
+//        FZFramebuffer *fbo=[[FZFramebuffer alloc] initWithSize:size];
+//        [fbo beginDrawingWithRenderbufferSize:size];
+//        [TestDraw drawRandomRect];
+//        [fbo endDrawing];
+//        [fbo feedFramebufferToFilter:self.imageView];
+//    });
 }
 
 @end

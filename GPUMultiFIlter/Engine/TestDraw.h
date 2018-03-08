@@ -10,5 +10,6 @@
 #import <GPUImage/GPUImage.h>
 @interface TestDraw : NSObject
 + (void)drawRect;
++ (void)drawRandomRect;
 + (UIImage *)imageWithBuffer:(GLubyte *)buffer ofSize:(CGSize)size;
 @end

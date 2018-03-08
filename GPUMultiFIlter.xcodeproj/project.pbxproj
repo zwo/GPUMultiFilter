@@ -39,6 +39,8 @@
 		C46A0B921FFB68790055FCDC /* Stream2.glsl in Resources */ = {isa = PBXBuildFile; fileRef = C46A0B801FFB68790055FCDC /* Stream2.glsl */; };
 		C46A0B961FFB6A010055FCDC /* FZInkSim.m in Sources */ = {isa = PBXBuildFile; fileRef = C46A0B951FFB6A010055FCDC /* FZInkSim.m */; };
 		C46C5B121FFCA94E00B3F259 /* FZTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = C46C5B111FFCA94E00B3F259 /* FZTexture.m */; };
+		C470A4722051158D00C56A62 /* Play.glsl in Resources */ = {isa = PBXBuildFile; fileRef = C470A4712051158D00C56A62 /* Play.glsl */; };
+		C470A475205115C100C56A62 /* FZPlayFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = C470A474205115C100C56A62 /* FZPlayFilter.m */; };
 		C49EE50D204B910F0024A4AB /* pic_community_01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C49EE50C204B910F0024A4AB /* pic_community_01.jpg */; };
 		C49EE510204BD2B70024A4AB /* FZXYZ4OutputDebugFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = C49EE50F204BD2B70024A4AB /* FZXYZ4OutputDebugFilter.m */; };
 		C4B106162011C85100162533 /* FZAddWaterFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = C4B106152011C85100162533 /* FZAddWaterFilter.m */; };
@@ -108,6 +110,9 @@
 		C46A0B951FFB6A010055FCDC /* FZInkSim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZInkSim.m; sourceTree = "<group>"; };
 		C46C5B101FFCA94E00B3F259 /* FZTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FZTexture.h; sourceTree = "<group>"; };
 		C46C5B111FFCA94E00B3F259 /* FZTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZTexture.m; sourceTree = "<group>"; };
+		C470A4712051158D00C56A62 /* Play.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Play.glsl; sourceTree = "<group>"; };
+		C470A473205115C100C56A62 /* FZPlayFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FZPlayFilter.h; sourceTree = "<group>"; };
+		C470A474205115C100C56A62 /* FZPlayFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZPlayFilter.m; sourceTree = "<group>"; };
 		C49EE50C204B910F0024A4AB /* pic_community_01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic_community_01.jpg; sourceTree = "<group>"; };
 		C49EE50E204BD2B70024A4AB /* FZXYZ4OutputDebugFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FZXYZ4OutputDebugFilter.h; sourceTree = "<group>"; };
 		C49EE50F204BD2B70024A4AB /* FZXYZ4OutputDebugFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FZXYZ4OutputDebugFilter.m; sourceTree = "<group>"; };
@@ -190,6 +195,7 @@
 		C46A0B6E1FFB68790055FCDC /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				C470A4712051158D00C56A62 /* Play.glsl */,
 				C46A0B6F1FFB68790055FCDC /* AddPigment.glsl */,
 				C46A0B701FFB68790055FCDC /* AddWater.glsl */,
 				C46A0B711FFB68790055FCDC /* Block.glsl */,
@@ -319,6 +325,8 @@
 				C4B106572011FAAF00162533 /* FZStream2Filter.m */,
 				C49EE50E204BD2B70024A4AB /* FZXYZ4OutputDebugFilter.h */,
 				C49EE50F204BD2B70024A4AB /* FZXYZ4OutputDebugFilter.m */,
+				C470A473205115C100C56A62 /* FZPlayFilter.h */,
+				C470A474205115C100C56A62 /* FZPlayFilter.m */,
 			);
 			path = Filters;
 			sourceTree = "<group>";
@@ -391,6 +399,7 @@
 				C46A0B891FFB68790055FCDC /* GetZ.glsl in Resources */,
 				C4690A6A1FF645AE009E9600 /* alum.jpg in Resources */,
 				C46A0B811FFB68790055FCDC /* AddPigment.glsl in Resources */,
+				C470A4722051158D00C56A62 /* Play.glsl in Resources */,
 				C4C500641FF48BD7004DDC11 /* Assets.xcassets in Resources */,
 				C4C500621FF48BD7004DDC11 /* Main.storyboard in Resources */,
 				C4690A6E1FF645AE009E9600 /* grain2.jpg in Resources */,
@@ -444,6 +453,7 @@
 				C4C5005C1FF48BD7004DDC11 /* AppDelegate.m in Sources */,
 				C4B106372011F7DB00162533 /* FZGapFilter.m in Sources */,
 				C49EE510204BD2B70024A4AB /* FZXYZ4OutputDebugFilter.m in Sources */,
+				C470A475205115C100C56A62 /* FZPlayFilter.m in Sources */,
 				C4C500591FF48BD7004DDC11 /* main.m in Sources */,
 				C4B106432011F91400162533 /* FZInkFlowFilter.m in Sources */,
 				C4B106582011FAAF00162533 /* FZStream2Filter.m in Sources */,

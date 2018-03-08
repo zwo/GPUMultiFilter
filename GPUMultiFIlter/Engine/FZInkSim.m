@@ -24,6 +24,8 @@
 #import "FZGetXYZFilter.h"
 #import "FZGetZFilter.h"
 #import "FZXYZ4OutputDebugFilter.h"
+#import "FZPlayFilter.h"
+
 @interface FZInkSim ()
 @property (strong, nonatomic) CADisplayLink *displayLink;
 @property (strong, nonatomic) FZTexture *grainTexture;
@@ -60,6 +62,7 @@
 @property (strong, nonatomic) FZGetZFilter *getZFilter;
 
 @property (strong, nonatomic) FZFramebuffer *fboDebugDisplay;
+@property (strong, nonatomic) FZXYZ4OutputDebugFilter *debugOutputFilter;
 @end
 
 @implementation FZInkSim
@@ -147,6 +150,7 @@ void restoreToSystemDefaults(FZUniformInfos infos)
     [self fillDisorderBuffer];
     
     self.fboDebugDisplay=[[FZFramebuffer alloc] initWithSize:size];
+    self.debugOutputFilter=[[FZXYZ4OutputDebugFilter alloc] init];
 }
 
 - (void)fillDisorderBuffer
@@ -244,16 +248,16 @@ void restoreToSystemDefaults(FZUniformInfos infos)
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         
-        FZTexture *testTexture=[[FZTexture alloc] initWithImage:[UIImage imageNamed:@"pic_community_01.jpg"]];
-        FZXYZ4OutputDebugFilter *debugFilter=[[FZXYZ4OutputDebugFilter alloc] init];
-        debugFilter.renderFramebuffer=self.fboDebugDisplay.outputFramebuffer;
-        [debugFilter begin];
-        [debugFilter renderFramebuffer:testTexture.outputFramebuffer toGuadrant:1];
-        [debugFilter renderFramebuffer:_grainTexture.outputFramebuffer toGuadrant:2];
-        [debugFilter renderFramebuffer:_alumTexture.outputFramebuffer toGuadrant:3];
-        [debugFilter renderFramebuffer:_pinningTexture.outputFramebuffer toGuadrant:4];
-        [debugFilter end];
+        self.debugOutputFilter.renderFramebuffer=self.fboDebugDisplay.outputFramebuffer;
+        [self.debugOutputFilter begin];
+        [self.debugOutputFilter renderFramebuffer:[self.surfInkPP getNewFbo].outputFramebuffer toGuadrant:1];
+        [self.debugOutputFilter renderFramebuffer:[self.surfInkPP getOldFbo].outputFramebuffer toGuadrant:2];
+        [self.debugOutputFilter renderFramebuffer:self.fboDepositionBuffer.outputFramebuffer toGuadrant:3];
+        [self.debugOutputFilter renderFramebuffer:self.fboDisorder.outputFramebuffer toGuadrant:4];
+        [self.debugOutputFilter end];
+        
         [self.fboDebugDisplay feedFramebufferToFilter:self.renderView];
+        
     });
 }
 
@@ -262,8 +266,53 @@ void restoreToSystemDefaults(FZUniformInfos infos)
     if (drawBlock) {
         runAsynchronouslyOnVideoProcessingQueue(^{
             drawBlock(self.fboDepositionBuffer);
+            [self depositOnPaperSurface];
         });
     }
+}
+
+- (void)depositOnPaperSurface
+{
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);//OF_BLENDMODE_SCREEN
+    /*
+    self.addPigmentFilter.renderFramebuffer=[self.surfInkPP getNewFbo].outputFramebuffer;
+    self.addPigmentFilter.gamma=self.uniformInfos.gamma;
+    self.addPigmentFilter.baseMask=self.uniformInfos.baseMask;
+    [self.addPigmentFilter setSurfInkFramebuffer:[self.surfInkPP getOldFbo].outputFramebuffer waterSurfaceFramebuffer:self.fboDepositionBuffer.outputFramebuffer miscFramebuffer:[self.miscPP getOldFbo].outputFramebuffer];
+    [self.addPigmentFilter newFrameReadyAtTime:kCMTimeIndefinite atIndex:0];
+    [self.surfInkPP swap];
+    
+    self.addWaterFilter.renderFramebuffer=[self.miscPP getNewFbo].outputFramebuffer;
+    self.addWaterFilter.gamma=self.uniformInfos.gamma;
+    self.addWaterFilter.baseMask=self.uniformInfos.baseMask;
+    self.addWaterFilter.waterAmount=self.uniformInfos.waterAmount;
+    [self.addWaterFilter setMiscFramebuffer:[self.miscPP getOldFbo].outputFramebuffer waterSurfaceFramebuffer:self.fboDepositionBuffer.outputFramebuffer];
+    [self.addWaterFilter newFrameReadyAtTime:kCMTimeIndefinite atIndex:0];
+    [self.miscPP swap];
+    */
+    FZPlayFilter *playFilter=[FZPlayFilter new];
+    playFilter.renderFramebuffer=[self.surfInkPP getNewFbo].outputFramebuffer;
+    [playFilter setWaterSurfaceFramebuffer:self.fboDepositionBuffer.outputFramebuffer];
+    [playFilter newFrameReadyAtTime:kCMTimeIndefinite atIndex:0];
+    
+    glDisable(GL_BLEND);
+}
+
+// UIColor maps this range (0–360°) to the values 0–1 (0°=0.0, 360°=1.0).
++ (UIColor *)getInkColorHueAngle:(CGFloat)hueAngle sat:(CGFloat)sat depth:(CGFloat)depth
+{
+    CGFloat hue=hueAngle;
+    hue += 180;
+    if (hue>360) {
+        hue -= 360;
+    }
+    return [UIColor colorWithHue:hue/360.0 saturation:0.0 brightness:depth/255.0 alpha:1];
+}
+
++ (UIColor *)getInkColorHueAngle:(CGFloat)hueAngle
+{
+    return [self getInkColorHueAngle:hueAngle sat:255.0 depth:255.0];
 }
 
 @end

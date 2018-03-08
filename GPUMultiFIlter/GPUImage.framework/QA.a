@@ -68,3 +68,9 @@ Have to render 4 textures to the same framebuffer. 1. create a debug display fbo
 
 Q: Display on screen?
 GPUImageView: set display framebuffer, glClear, bind texture, glVertexAttribPointer for vertex and texture coord, glDrawArray, present framebuffer.
+
+Q: surInk empty?
+Analyze the route to surInk. Draw begin inksim begin and draw to depositfbo and end. Then add pigment filter.
+
+Q: How glViewPort matter?
+matter with glDrawArray point.

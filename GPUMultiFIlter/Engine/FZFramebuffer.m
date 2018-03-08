@@ -123,7 +123,7 @@
     if (errCode!=GL_NO_ERROR) {
         NSLog(@"113 error code %x", errCode);
     }
-//    free(imageData);
+    free(imageData);
 }
 
 - (void)clearRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha
