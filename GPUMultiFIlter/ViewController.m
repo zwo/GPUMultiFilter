@@ -77,7 +77,7 @@
 
 - (void)drawFrame
 {
-//    [self.inkSim update];
+    [self.inkSim update];
     [self.inkSim draw];
 }
 
