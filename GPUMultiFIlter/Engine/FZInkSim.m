@@ -63,6 +63,7 @@
 
 @property (strong, nonatomic) FZFramebuffer *fboDebugDisplay;
 @property (strong, nonatomic) FZXYZ4OutputDebugFilter *debugOutputFilter;
+@property (assign) NSInteger debugCounter;
 @end
 
 @implementation FZInkSim
@@ -166,6 +167,12 @@ void restoreToSystemDefaults(FZUniformInfos *infos)
         glDisable(GL_BLEND);
         FZUniformInfos uniforms=self.uniformInfos;
         
+        _debugCounter++;
+        NSLog(@"count %zd",_debugCounter);
+        if (_debugCounter==2) {
+            NSLog(@"hit");
+        }
+        
         self.blockFilter.renderFramebuffer=[self.miscPP getNewFbo].outputFramebuffer;
         self.blockFilter.advect_p=uniforms.advect_p;
         self.blockFilter.toe_p=uniforms.toe_p;
@@ -250,10 +257,10 @@ void restoreToSystemDefaults(FZUniformInfos *infos)
         
         self.debugOutputFilter.renderFramebuffer=self.fboDebugDisplay.outputFramebuffer;
         [self.debugOutputFilter begin];
-        [self.debugOutputFilter renderFramebuffer:[self.surfInkPP getNewFbo].outputFramebuffer toGuadrant:1];
-        [self.debugOutputFilter renderFramebuffer:[self.surfInkPP getOldFbo].outputFramebuffer toGuadrant:2];
-        [self.debugOutputFilter renderFramebuffer:self.fboDepositionBuffer.outputFramebuffer toGuadrant:3];
-        [self.debugOutputFilter renderFramebuffer:self.fboDisorder.outputFramebuffer toGuadrant:4];
+        [self.debugOutputFilter renderFramebuffer:[self.sinkInkPP getNewFbo].outputFramebuffer toGuadrant:1];
+        [self.debugOutputFilter renderFramebuffer:[self.sinkInkPP getOldFbo].outputFramebuffer toGuadrant:2];
+        [self.debugOutputFilter renderFramebuffer:[self.miscPP getNewFbo].outputFramebuffer toGuadrant:3];
+        [self.debugOutputFilter renderFramebuffer:[self.miscPP getOldFbo].outputFramebuffer toGuadrant:4];
         [self.debugOutputFilter end];
         
         [self.fboDebugDisplay feedFramebufferToFilter:self.renderView];
@@ -291,11 +298,11 @@ void restoreToSystemDefaults(FZUniformInfos *infos)
     [self.addWaterFilter newFrameReadyAtTime:kCMTimeIndefinite atIndex:0];
     [self.miscPP swap];
     
-    FZPlayFilter *playFilter=[FZPlayFilter new];
-    playFilter.renderFramebuffer=[self.surfInkPP getNewFbo].outputFramebuffer;
-    playFilter.pos=0.7;
-    [playFilter setWaterSurfaceFramebuffer:self.fboDepositionBuffer.outputFramebuffer];
-    [playFilter newFrameReadyAtTime:kCMTimeIndefinite atIndex:0];
+//    FZPlayFilter *playFilter=[FZPlayFilter new];
+//    playFilter.renderFramebuffer=[self.surfInkPP getNewFbo].outputFramebuffer;
+//    playFilter.pos=0.7;
+//    [playFilter setWaterSurfaceFramebuffer:self.fboDepositionBuffer.outputFramebuffer];
+//    [playFilter newFrameReadyAtTime:kCMTimeIndefinite atIndex:0];
     
     glDisable(GL_BLEND);
 }

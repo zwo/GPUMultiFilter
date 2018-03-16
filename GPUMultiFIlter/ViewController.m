@@ -90,11 +90,11 @@
     glViewport(0, 0, size.width,size.height);
     self.inkSim=[[FZInkSim alloc] initWithRenderView:self.imageView];
     [self.inkSim setupWithSize:size];
-    [self.inkSim drawBlock:^(FZFramebuffer *fboDepositionBuffer) {
-        [fboDepositionBuffer beginDrawingWithRenderbufferSize:size];
-        [TestDraw drawRandomRect];
-        [fboDepositionBuffer endDrawing];
-    }];
+//    [self.inkSim drawBlock:^(FZFramebuffer *fboDepositionBuffer) {
+//        [fboDepositionBuffer beginDrawingWithRenderbufferSize:size];
+//        [TestDraw drawRandomRect];
+//        [fboDepositionBuffer endDrawing];
+//    }];
     [self startDraw];
     
 //    runAsynchronouslyOnVideoProcessingQueue(^{

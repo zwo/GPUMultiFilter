@@ -74,3 +74,7 @@ Analyze the route to surInk. Draw begin inksim begin and draw to depositfbo and 
 
 Q: How glViewPort matter?
 matter with glDrawArray point.
+
+Q: debug method
+-FZInkSim:draw
+-ViewController:drawFrame
