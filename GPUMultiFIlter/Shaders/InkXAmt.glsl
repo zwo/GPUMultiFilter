@@ -4,7 +4,7 @@ uniform sampler2D MiscMap;
 uniform sampler2D FlowInkMap;
 uniform sampler2D FixInkMap;
 
-lowp uniform vec3 FixRate;
+uniform lowp vec3 FixRate;
 
 void main(void)
 {
