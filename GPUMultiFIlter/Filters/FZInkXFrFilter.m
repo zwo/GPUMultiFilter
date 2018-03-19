@@ -19,7 +19,7 @@
 
 - (instancetype)init
 {
-    NSString *path=[[NSBundle mainBundle] pathForResource:@"Block" ofType:@"glsl"];
+    NSString *path=[[NSBundle mainBundle] pathForResource:@"InkXFr" ofType:@"glsl"];
     NSString *fragmentShaderString = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
     if (!(self = [super initWithFragmentShaderFromString:fragmentShaderString]))
     {
