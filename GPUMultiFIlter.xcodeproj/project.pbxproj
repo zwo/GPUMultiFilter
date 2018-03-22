@@ -370,6 +370,7 @@
 				TargetAttributes = {
 					C4C500531FF48BD7004DDC11 = {
 						CreatedOnToolsVersion = 8.3.1;
+						DevelopmentTeam = A27D4545KT;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -586,7 +587,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = A27D4545KT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GPUMultiFIlter",
@@ -596,7 +597,8 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rfchina.com.GPUMultiFIlter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "19326f63-9342-4f00-aee1-2d1f07c24d18";
+				PROVISIONING_PROFILE_SPECIFIER = SLWildcardDevelop;
 			};
 			name = Debug;
 		};
