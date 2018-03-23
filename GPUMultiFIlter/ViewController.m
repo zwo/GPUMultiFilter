@@ -40,7 +40,7 @@
     runOnMainQueueWithoutDeadlocking(^{
         if (self.displayLink == nil) {
             self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(drawFrame)];
-            self.displayLink.frameInterval=60;
+            self.displayLink.frameInterval=30;
             [self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
         }
     });
@@ -62,17 +62,13 @@
     CGSize size=_imageView.frame.size;
     CGFloat contentScale = [[UIScreen mainScreen] scale];
     size=CGSizeMake(size.width*contentScale, size.height*contentScale);
-    glViewport(0, 0, size.width,size.height);
-	runAsynchronouslyOnVideoProcessingQueue(^{        
-        self.fboPingPong=[[FZFramebufferPingPong alloc] initWithSize:size];
-        FZFramebuffer *fbo=[self.fboPingPong getNewFbo];
-        GPUImagePicture *picture=[[GPUImagePicture alloc] initWithImage:[UIImage imageNamed:@"3.jpg"]];
-        [picture addTarget:fbo];
-        [fbo addTarget:self.imageView];
-        [picture processImage];
-        [self.fboPingPong swap];
-        [self startDraw];
-    });
+    [self.inkSim drawBlock:^(FZFramebuffer *fboDepositionBuffer) {
+        [fboDepositionBuffer beginDrawingWithRenderbufferSize:size];
+        [TestDraw drawRandomRect];
+//        [fboDepositionBuffer endDrawing];
+        [self.inkSim beginDebug];
+        [self.inkSim draw];
+    }];
 }
 
 - (void)drawFrame
@@ -96,6 +92,14 @@
 //        [fboDepositionBuffer endDrawing];
 //    }];
     [self startDraw];
+    
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self.inkSim drawBlock:^(FZFramebuffer *fboDepositionBuffer) {
+//            [fboDepositionBuffer beginDrawingWithRenderbufferSize:size];
+//            [TestDraw drawRandomRect];
+//            [fboDepositionBuffer endDrawing];
+//        }];
+//    });
     
 //    runAsynchronouslyOnVideoProcessingQueue(^{
 //        FZFramebuffer *fbo=[[FZFramebuffer alloc] initWithSize:size];

@@ -12,10 +12,10 @@ void main(void)
  highp vec4 a = texture2D(Alum, Tex0);
  highp vec4 p = texture2D(Pinning, Tex0);
  
- lowp float gg = (g.x + g.y + g.z) / 3.0;
- lowp float aa = (a.x + a.y + a.z) / 3.0;
- lowp float pp = (p.x + p.y + p.z) / 3.0;
- lowp float co = 1.0;
+ highp float gg = (g.x + g.y + g.z) / 3.0;
+ highp float aa = (a.x + a.y + a.z) / 3.0;
+ highp float pp = (p.x + p.y + p.z) / 3.0;
+ highp float co = 1.0;
  
  gg *= co;
  aa *= co;

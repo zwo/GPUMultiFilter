@@ -104,12 +104,16 @@ static int randomNumberRange(int from, int to)
     CGFloat r,g,b;
     [ramdomColor getRed:&r green:&g blue:&b alpha:nil];
     
+    width=0.3;
+    posX=0-width/2.0;
+    posY=width/2.0;
+    
     Vertex lr={{posX+width,posY-width,0},{r,g,b,1}};
     Vertex ur={{posX+width,posY,0},{r,g,b,1}};
     Vertex ul={{posX,posY,0},{r,g,b,1}};
     Vertex ll={{posX,posY-width,0},{r,g,b,1}};
     Vertex rectVertex[]={lr,ur,ul,ll};
-    [GPUImageContext useImageProcessingContext];
+//    [GPUImageContext useImageProcessingContext];
     GLProgram *program=[[GLProgram alloc] initWithVertexShaderString:kRectVertShader fragmentShaderString:kRectFragShader];
     [program addAttribute:@"position"];
     [program addAttribute:@"SourceColor"];
@@ -130,7 +134,7 @@ static int randomNumberRange(int from, int to)
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices), Indices, GL_STATIC_DRAW);
     
-    glClearColor(0.0, 0.0, 0.0, 1.0);
+    glClearColor(0.0, 0.0, 0.0, 0.0);
     glClear(GL_COLOR_BUFFER_BIT);
     
     //    glViewport(0, 0, 128, 128);

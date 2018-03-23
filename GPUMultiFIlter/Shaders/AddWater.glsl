@@ -3,9 +3,9 @@ varying highp vec2 textureCoordinate;
 uniform sampler2D Misc;
 uniform sampler2D WaterSurface;
 
-uniform mediump float gamma;
-uniform mediump float baseMask;
-uniform mediump float waterAmount;
+uniform highp float gamma;
+uniform highp float baseMask;
+uniform highp float waterAmount;
 
 void main(void)
 {
@@ -13,9 +13,9 @@ void main(void)
  
  highp vec4 mi = texture2D(Misc, Tex0);
  highp vec4 wa = texture2D(WaterSurface, Tex0);
- mediump float DepMask = max(1.0 - mi.z / gamma, baseMask);
+ highp float DepMask = max(1.0 - mi.z / gamma, baseMask);
  
- mediump float temp_waterAmount = 0.0;
+ highp float temp_waterAmount = 0.0;
  
  if (wa.w != 0.0)
  {

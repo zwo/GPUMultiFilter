@@ -6,8 +6,8 @@ uniform sampler2D Dist2Map;
 uniform sampler2D FlowInkMap;
 uniform sampler2D SurfInkMap;
 
-uniform mediump vec2 Blk_a;
-uniform mediump vec2 offset;
+uniform highp vec2 Blk_a;
+uniform highp vec2 offset;
 
 void main(void)
 {
@@ -49,13 +49,13 @@ void main(void)
  highp vec4 pf7 = texture2D(FlowInkMap, TexE_SE.zw);
  highp vec4 pf8 = texture2D(FlowInkMap, TexN_NE.zw);
  
- mediump vec4 iFill;
- mediump vec4 iStream;
+ highp vec4 iFill;
+ highp vec4 iStream;
  highp vec4 is = texture2D(SurfInkMap, Tex0);
  
  bool JustFilled;
- mediump vec4 pf;
- mediump vec4 ia;
+ highp vec4 pf;
+ highp vec4 ia;
  
  if (lwf == 0.0 && wf != 0.0)
      JustFilled = true;

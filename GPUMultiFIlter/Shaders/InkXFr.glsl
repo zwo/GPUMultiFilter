@@ -8,7 +8,7 @@ void main(void)
  
  highp vec4 sink = texture2D(SinkInkMap, Tex0);
  highp vec4 if0 = texture2D(FlowInkMap, Tex0);
- lowp vec4 if_new = if0 - sink;
+ highp vec4 if_new = if0 - sink;
  
  gl_FragColor = if_new;
 }

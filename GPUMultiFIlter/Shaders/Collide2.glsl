@@ -2,12 +2,12 @@ precision highp float;
 
 varying vec2 textureCoordinate;
 
-uniform mediump float A;
-uniform mediump float B;
-uniform mediump float C;
-uniform mediump float D;
-uniform mediump float advect_p;
-uniform mediump float Omega;
+uniform highp float A;
+uniform highp float B;
+uniform highp float C;
+uniform highp float D;
+uniform highp float advect_p;
+uniform highp float Omega;
 
 uniform sampler2D VelDenMap;
 uniform sampler2D Dist2Map;

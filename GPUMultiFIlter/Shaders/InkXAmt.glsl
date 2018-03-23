@@ -4,7 +4,7 @@ uniform sampler2D MiscMap;
 uniform sampler2D FlowInkMap;
 uniform sampler2D FixInkMap;
 
-uniform lowp vec3 FixRate;
+uniform highp vec3 FixRate;
 
 void main(void)
 {
@@ -14,18 +14,18 @@ void main(void)
  highp float wf = texture2D(VelDenMap, Tex0).z;
  highp vec4 if0 = texture2D(FlowInkMap, Tex0);
  
- lowp float wLoss = max(lwf - wf, 0.0);
- lowp float FixFactor;
+ highp float wLoss = max(lwf - wf, 0.0);
+ highp float FixFactor;
  
  if (wLoss > 0.0)
      FixFactor = wLoss / lwf;
  else
      FixFactor = 0.0;
  
- lowp float mu_star = clamp(FixRate.y + FixRate.z * if0.w, 0.0, 1.0);
+ highp float mu_star = clamp(FixRate.y + FixRate.z * if0.w, 0.0, 1.0);
  FixFactor = max(FixFactor * (1.0 - smoothstep(0.0, mu_star, wf)), FixRate.x);
  
- lowp vec4 sink = if0 * FixFactor;
+ highp vec4 sink = if0 * FixFactor;
  
  gl_FragColor = sink;
 }

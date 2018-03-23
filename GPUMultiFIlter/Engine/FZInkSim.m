@@ -64,6 +64,7 @@
 @property (strong, nonatomic) FZFramebuffer *fboDebugDisplay;
 @property (strong, nonatomic) FZXYZ4OutputDebugFilter *debugOutputFilter;
 @property (assign) NSInteger debugCounter;
+@property (assign) BOOL isDebugging;
 @end
 
 @implementation FZInkSim
@@ -104,6 +105,12 @@ void restoreToSystemDefaults(FZUniformInfos *infos)
     infos->toe_p = 0.100000001;
     infos->waterAmount = 1.000000000;
     infos->wf_mul = 1.0f;
+}
+
+- (void)beginDebug
+{
+    _debugCounter=0;
+    self.isDebugging=YES;
 }
 
 - (void)setupWithSize:(CGSize)size
@@ -167,10 +174,12 @@ void restoreToSystemDefaults(FZUniformInfos *infos)
         glDisable(GL_BLEND);
         FZUniformInfos uniforms=self.uniformInfos;
         
-        _debugCounter++;
-        NSLog(@"count %zd",_debugCounter);
-        if (_debugCounter==2) {
-            NSLog(@"hit");
+        if (self.isDebugging) {
+            _debugCounter++;
+//            NSLog(@"count %zd",_debugCounter);
+            if (_debugCounter==2) {
+                NSLog(@"hit");
+            }
         }
         
         self.blockFilter.renderFramebuffer=[self.miscPP getNewFbo].outputFramebuffer;
@@ -257,10 +266,10 @@ void restoreToSystemDefaults(FZUniformInfos *infos)
         
         self.debugOutputFilter.renderFramebuffer=self.fboDebugDisplay.outputFramebuffer;
         [self.debugOutputFilter begin];
-        [self.debugOutputFilter renderFramebuffer:[self.sinkInkPP getNewFbo].outputFramebuffer toGuadrant:1];
-        [self.debugOutputFilter renderFramebuffer:[self.sinkInkPP getOldFbo].outputFramebuffer toGuadrant:2];
-        [self.debugOutputFilter renderFramebuffer:[self.miscPP getNewFbo].outputFramebuffer toGuadrant:3];
-        [self.debugOutputFilter renderFramebuffer:[self.miscPP getOldFbo].outputFramebuffer toGuadrant:4];
+        [self.debugOutputFilter renderFramebuffer:self.fboDepositionBuffer.outputFramebuffer toGuadrant:1];
+        [self.debugOutputFilter renderFramebuffer:[self.surfInkPP getOldFbo].outputFramebuffer toGuadrant:2];
+        [self.debugOutputFilter renderFramebuffer:[self.flowInkPP getOldFbo].outputFramebuffer toGuadrant:3];
+        [self.debugOutputFilter renderFramebuffer:[self.fixInkPP getOldFbo].outputFramebuffer toGuadrant:4];
         [self.debugOutputFilter end];
         
         [self.fboDebugDisplay feedFramebufferToFilter:self.renderView];

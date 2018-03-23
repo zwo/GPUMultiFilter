@@ -4,8 +4,8 @@ uniform sampler2D SurfInk;
 uniform sampler2D WaterSurface;
 uniform sampler2D Misc;
 
-uniform mediump float gamma;
-uniform mediump float baseMask;
+uniform highp float gamma;
+uniform highp float baseMask;
 
 void main(void)
 {
@@ -15,11 +15,11 @@ void main(void)
  highp vec4 wa = texture2D(WaterSurface, Tex0);
  highp vec4 mi = texture2D(Misc, Tex0);
  
- mediump float DepMask = max(1.0 - mi.z / gamma, baseMask);
+ highp float DepMask = max(1.0 - mi.z / gamma, baseMask);
  
- mediump float re = is.x + clamp(wa.x, 0.0, DepMask);
- mediump float gr = is.y + clamp(wa.y, 0.0, DepMask);
- mediump float bl = is.z + clamp(wa.z, 0.0, DepMask);
+ highp float re = is.x + clamp(wa.x, 0.0, DepMask);
+ highp float gr = is.y + clamp(wa.y, 0.0, DepMask);
+ highp float bl = is.z + clamp(wa.z, 0.0, DepMask);
  
  gl_FragColor = vec4(re, gr, bl, is.w);
 

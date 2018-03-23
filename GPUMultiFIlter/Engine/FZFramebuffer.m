@@ -101,7 +101,9 @@
 
 - (void)beginDrawingWithRenderbufferSize:(CGSize)size
 {
-    [self createFramebufferWithSize:size];
+//    [self createFramebufferWithSize:size];
+    [GPUImageContext useImageProcessingContext];
+    [self activateFramebuffer];
 }
 
 - (void)endDrawing
@@ -135,7 +137,7 @@
 
 - (void)clear
 {
-    [self clearRed:255 green:0 blue:255 alpha:1];
+    [self clearRed:0 green:0 blue:0 alpha:0];
 }
 
 - (UIImage *)testEndDrawing

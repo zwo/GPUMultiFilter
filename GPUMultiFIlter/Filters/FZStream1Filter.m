@@ -84,6 +84,11 @@
 	glVertexAttribPointer(filterTextureCoordinateAttribute, 2, GL_FLOAT, 0, 0, textureCoordinates);
     
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    
+    GLenum err = glGetError();
+    if (err != GL_NO_ERROR) {
+        NSLog(@"%s glerr %zd ",__PRETTY_FUNCTION__,err);
+    }
 
     [_MiscMapFramebuffer unlock];
 	[_Dist1MapFramebuffer unlock];

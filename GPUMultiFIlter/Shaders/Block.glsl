@@ -1,14 +1,14 @@
 varying highp vec2 textureCoordinate;
 
-uniform mediump float A0;
-uniform mediump float advect_p;
-uniform mediump vec3 Blk_1;
-uniform mediump vec2 Blk_2;
-uniform mediump vec3 Pin_w;
-uniform mediump float toe_p;
-uniform mediump float Omega;
-uniform mediump float Corn_mul;
-uniform mediump vec2 offset;
+uniform highp float A0;
+uniform highp float advect_p;
+uniform highp vec3 Blk_1;
+uniform highp vec2 Blk_2;
+uniform highp vec3 Pin_w;
+uniform highp float toe_p;
+uniform highp float Omega;
+uniform highp float Corn_mul;
+uniform highp vec2 offset;
 
 uniform sampler2D MiscMap;
 uniform sampler2D VelDenMap;
@@ -18,8 +18,8 @@ uniform sampler2D DisorderMap;
 
 void main(void){
  
- mediump float dx = offset.s;
- mediump float dy = offset.t;
+ highp float dx = offset.s;
+ highp float dy = offset.t;
  
  highp vec2 Tex0 = textureCoordinate;
  
@@ -31,11 +31,11 @@ void main(void){
  highp vec4 Misc0 = texture2D(MiscMap, Tex0);
  highp vec4 VelDen = texture2D(VelDenMap, Tex0);
  
- mediump float f0 = Misc0.y;
- mediump float ws = Misc0.w;
- mediump vec2 v = VelDen.xy;
- mediump float wf = VelDen.z;
- mediump float seep = VelDen.w;
+ highp float f0 = Misc0.y;
+ highp float ws = Misc0.w;
+ highp vec2 v = VelDen.xy;
+ highp float wf = VelDen.z;
+ highp float seep = VelDen.w;
  
  highp float glue = texture2D(FlowInkMap, Tex0).w;
  highp float FixBlk = texture2D(FixInkMap, Tex0).w;
@@ -43,20 +43,20 @@ void main(void){
  highp vec4 Disorder = texture2D(DisorderMap, Tex0);
  
  // Derive ad: Less advection for lower wf
- mediump float ad = smoothstep(0.0, advect_p, wf);
+ highp float ad = smoothstep(0.0, advect_p, wf);
  
  // Derive f0
- mediump float f0_eq = A0 * wf - ad * (2.0 / 3.0) * dot(v, v);
+ highp float f0_eq = A0 * wf - ad * (2.0 / 3.0) * dot(v, v);
  f0 = mix(f0, f0_eq, Omega);
  
- mediump float GrainBlock = Disorder.x;
- mediump float AlumBlock = Disorder.z;
- mediump float block = Blk_1.x + dot(Blk_1.yz, vec2(GrainBlock, AlumBlock)) + dot(Blk_2.xy, vec2(glue, FixBlk));
+ highp float GrainBlock = Disorder.x;
+ highp float AlumBlock = Disorder.z;
+ highp float block = Blk_1.x + dot(Blk_1.yz, vec2(GrainBlock, AlumBlock)) + dot(Blk_2.xy, vec2(glue, FixBlk));
  block = min(1.0, block);
  bool pinning = (wf == 0.0);
  
- mediump float Pindisor = mix(Disorder.x, Disorder.w, smoothstep(0.0, toe_p, glue));
- mediump float pin = Pin_w.x + dot(Pin_w.yz, vec2(FixBlk, Pindisor));
+ highp float Pindisor = mix(Disorder.x, Disorder.w, smoothstep(0.0, toe_p, glue));
+ highp float pin = Pin_w.x + dot(Pin_w.yz, vec2(FixBlk, Pindisor));
  
  pinning = (pinning) && (texture2D(VelDenMap, TexN_NE.xy).z < pin);
  pinning = (pinning) && (texture2D(VelDenMap, TexE_SE.xy).z < pin);

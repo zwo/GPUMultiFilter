@@ -3,13 +3,13 @@ varying highp vec2 textureCoordinate;
 uniform sampler2D MiscMap;
 uniform sampler2D Dist2Map;
 
-uniform mediump float Evapor_b;
-uniform mediump vec2 offset;
+uniform highp float Evapor_b;
+uniform highp vec2 offset;
 
 void main(void)
 {
- mediump float dx = offset.s;
- mediump float dy = offset.t;
+ highp float dx = offset.s;
+ highp float dy = offset.t;
  
  highp vec2 Tex0 = textureCoordinate;
  
@@ -24,13 +24,13 @@ void main(void)
  highp float bNW = texture2D(MiscMap, TexW_NW.zw).x;
  highp float bSW = texture2D(MiscMap, TexS_SW.zw).x;
  
- mediump vec4 b = vec4(bSW, bNW, bSE, bNE);
+ highp vec4 b = vec4(bSW, bNW, bSE, bNE);
  b = (b + b0) / 2.0;
  
- mediump vec4 pinned = vec4(b.x > 1.0, b.y > 1.0, b.z > 1.0, b.w > 1.0);
+ highp vec4 pinned = vec4(b.x > 1.0, b.y > 1.0, b.z > 1.0, b.w > 1.0);
  b = min(b, 1.0);
- mediump vec4 f_Out;
- mediump vec4 f_In;
+ highp vec4 f_Out;
+ highp vec4 f_In;
  
  f_Out = texture2D(Dist2Map, Tex0);
  f_In.x = texture2D(Dist2Map, TexS_SW.zw).x;
@@ -38,7 +38,7 @@ void main(void)
  f_In.z = texture2D(Dist2Map, TexE_SE.zw).z;
  f_In.w = texture2D(Dist2Map, TexN_NE.zw).w;
  
- mediump vec4 OUT = mix(f_In, f_Out.wzyx, b);
+ highp vec4 OUT = mix(f_In, f_Out.wzyx, b);
  
  gl_FragColor = max(OUT - pinned * Evapor_b, 0.0);
 }
