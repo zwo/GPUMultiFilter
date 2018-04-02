@@ -78,3 +78,10 @@ matter with glDrawArray point.
 Q: debug method
 -FZInkSim:draw
 -ViewController:drawFrame
+Color debug:
+const vec4 testColor=vec4(1.0,0.0,1.0,1.0);
+if (Blk_1.y>0.4 && Tex0.x<0.2 && Tex0.y<0.2) {
+	gl_FragColor = testColor;
+}else{
+	gl_FragColor = vec4(block, f0, wf, max(ws - seep, 0.0));
+}
