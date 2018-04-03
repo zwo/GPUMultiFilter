@@ -9,6 +9,7 @@
 #import "FZFramebuffer.h"
 #import "TestDraw.h"
 #import "FZPassthroughFilter.h"
+#import <time.h>
 @interface FZFramebuffer ()
 @property (strong, nonatomic) GPUImageFramebuffer *inputFramebuffer;
 @property (assign, nonatomic) GLuint framebufferForDrawing;
@@ -346,6 +347,29 @@
 - (BOOL)enabled
 {
     return YES;
+}
+
+- (void)saveImageToDocument
+{
+    CGImageRef imageRef=[self.outputFramebuffer newCGImageFromFramebufferContents];
+    UIImage *image=[UIImage imageWithCGImage:imageRef];
+    NSData *pngData = UIImagePNGRepresentation(image);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0]; //Get the docs directory
+    time_t currentTime = time(NULL);
+    struct tm timeStruct;
+    localtime_r(&currentTime, &timeStruct);
+    char buffer[20];
+    strftime(buffer, 20, "%d-%m-%Y %H:%M", &timeStruct);
+    NSString *filename=[NSString stringWithFormat:@"%s.png",buffer];
+    NSString *filePath = [documentsPath stringByAppendingPathComponent:filename]; //Add the file name
+    BOOL success = [pngData writeToFile:filePath atomically:YES]; //Write the file
+    CGImageRelease(imageRef);
+    if (success) {
+        NSLog(@"success, write to %@", filePath);
+    } else {
+        NSLog(@"output image file. %s", __PRETTY_FUNCTION__);
+    }
 }
 
 @end

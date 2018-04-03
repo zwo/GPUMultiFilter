@@ -28,4 +28,5 @@
 - (void)removeAllTargets;
 
 - (UIImage *)testEndDrawing;
+- (void)saveImageToDocument;
 @end
