@@ -85,3 +85,6 @@ if (Blk_1.y>0.4 && Tex0.x<0.2 && Tex0.y<0.2) {
 }else{
 	gl_FragColor = vec4(block, f0, wf, max(ws - seep, 0.0));
 }
+
+Q: not up and left propogate
+1. FZInkXToFilter not set bool 2.texture format 3. debug abcd
