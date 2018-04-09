@@ -88,3 +88,9 @@ if (Blk_1.y>0.4 && Tex0.x<0.2 && Tex0.y<0.2) {
 
 Q: not up and left propogate
 1. FZInkXToFilter not set bool 2.texture format 3. debug abcd
+
+Terms
+percolation 渗透 permeability 渗透性 advection 平流平移 Viscosity 粘度 capillary 毛细管 Pigments 颜料
+
+the movement of pigments can
+be divided into three parts: supply, advection, and fixture.
