@@ -94,3 +94,25 @@ percolation 渗透 permeability 渗透性 advection 平流平移 Viscosity 粘�
 
 the movement of pigments can
 be divided into three parts: supply, advection, and fixture.
+
+Texture
+1. VelDen [u, v, wf, seep]
+2. Misc   [blk, f0, lwf, ws]
+3. Dist1  f[N, E, W, S]
+4. Dist2  f[NE, SE, NW, SW]
+
+// debug
+int iDebugCounter;
+    bool bEnableDebugCounter;
+
+if (bEnableDebugCounter) {
+        iDebugCounter++;
+//        cout << "counter: " << iDebugCounter << endl;
+        if (iDebugCounter==2) {
+            cout << "hit" << endl;
+            saveFboToImage(depositionBuffer);
+        }
+    }
+
+inkSim.iDebugCounter=0;
+        inkSim.bEnableDebugCounter=true;
