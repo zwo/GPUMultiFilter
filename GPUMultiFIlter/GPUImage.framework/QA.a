@@ -98,21 +98,18 @@ be divided into three parts: supply, advection, and fixture.
 Texture
 1. VelDen [u, v, wf, seep]
 2. Misc   [blk, f0, lwf, ws]
-3. Dist1  f[N, E, W, S]
+3. Dist1  f[N, E, W, S]  all channel < 0
 4. Dist2  f[NE, SE, NW, SW]
+InkMap,    [P1, P2, P3, glue]
+FixInkMap, [P1, P2, P3, block]
+DisorderMap, d[grain, -cap-, block, pin]
 
-// debug
-int iDebugCounter;
-    bool bEnableDebugCounter;
-
-if (bEnableDebugCounter) {
-        iDebugCounter++;
-//        cout << "counter: " << iDebugCounter << endl;
-        if (iDebugCounter==2) {
-            cout << "hit" << endl;
-            saveFboToImage(depositionBuffer);
-        }
-    }
-
-inkSim.iDebugCounter=0;
-        inkSim.bEnableDebugCounter=true;
+u, v Water velocity
+wf  Water density in flow layer
+lwf Water density in flow layer in the last iteration
+ws Water amount on surface layer
+seep Amount of water seeping from surface layer to flow layer
+blk Blocking factor
+f0 Distribution function for stationary particles
+f[N, E, W, S] Dist. functions towards nearest neighbors
+f[NE, SE, NW, SW] Dist. functions towards next nearest neighbors
