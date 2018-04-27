@@ -97,7 +97,7 @@ be divided into three parts: supply, advection, and fixture.
 
 Texture
 1. VelDen [u, v, wf, seep]
-2. Misc   [blk, f0, lwf, ws]
+2. Misc   [blk, f0, lwf, ws] all channel > 0
 3. Dist1  f[N, E, W, S]  all channel < 0
 4. Dist2  f[NE, SE, NW, SW]
 InkMap,    [P1, P2, P3, glue]

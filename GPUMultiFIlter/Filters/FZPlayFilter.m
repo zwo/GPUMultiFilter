@@ -28,10 +28,11 @@
     return self;
 }
 
-- (void)setPos:(CGFloat)pos
+- (void)setPos:(NSInteger)pos
 {
     _pos=pos;
-    [self setFloat:pos forUniform:_posUniform program:filterProgram];
+    
+    [self setInteger:pos forUniform:_posUniform program:filterProgram];
 }
 
 - (void)setWaterSurfaceFramebuffer:(GPUImageFramebuffer *)waterSurfaceFramebuffer

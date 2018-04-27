@@ -11,5 +11,6 @@
 @interface TestDraw : NSObject
 + (void)drawRect;
 + (void)drawRandomRect;
++ (void)drawTriangle;
 + (UIImage *)imageWithBuffer:(GLubyte *)buffer ofSize:(CGSize)size;
 @end

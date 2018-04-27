@@ -3,7 +3,7 @@ varying highp vec2 textureCoordinate;
 
 
 uniform sampler2D WaterSurface;
-uniform float pos;
+uniform int pos;
 
 bool inRect(float,float,float,float);
 void ledRectChar(int,float,float,float,float);
@@ -14,17 +14,28 @@ void main(void)
  highp vec2 Tex0 = textureCoordinate;
 
 
- highp vec4 wa = texture2D(WaterSurface, Tex0);
+ highp vec4 allValue = texture2D(WaterSurface, Tex0);
  
- highp vec2 xy = 2.0 * textureCoordinate - 1.0;
- mediump vec4 foreColor = vec4(0.5,0.5,0.0,1);
- mediump vec4 color = wa;
- // if (xy.x<(pos+0.1) && xy.x>pos) {
- //     color = mix(color,foreColor,0.5);
- // }
- 
- gl_FragColor = color;
- showFloat(pos);
+    highp float color;
+    if (pos==0) {
+        color=allValue.x;
+    }else if (pos==1) {
+        color=allValue.y;
+    }else if (pos==2) {
+        color=allValue.z;
+    }else if (pos==3) {
+        color=allValue.w;
+    }
+
+    if (color>=0.0) {
+        gl_FragColor = vec4(1.0,0.0,0.0,1.0);
+    }else if (color > -1.0){
+        gl_FragColor = vec4(0.0,0.0,1.0,1.0);
+    }else{
+        gl_FragColor = vec4(0.0,1.0,0.0,1.0);
+    }
+// gl_FragColor = color;
+// showFloat(pos);
 }
 
 void showFloat(float f){

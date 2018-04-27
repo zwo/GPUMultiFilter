@@ -94,6 +94,57 @@ static int randomNumberRange(int from, int to)
     return (int)(from + (arc4random() % (to - from + 1))); //+1,result is [from to]; else is [from, to)!!!!!!!
 }
 
++ (void)drawTriangle
+{
+    CGFloat width=randomNumberRange(20, 30)*0.01; // 0.2 ~ 0.3
+    CGFloat posX=randomNumberRange(-10, 10)*0.1; // -1 ~ 1
+    CGFloat posY=randomNumberRange(-10, 10)*0.1; // -1 ~ 1
+    CGFloat hueAngle=(CGFloat)randomNumberRange(0, 360);
+    UIColor *ramdomColor=[FZInkSim getInkColorHueAngle:hueAngle];
+    CGFloat r,g,b;
+    [ramdomColor getRed:&r green:&g blue:&b alpha:nil];
+    width=0.3;
+    posX=0-width/2.0;
+    posY=width/2.0;
+    Vertex ur={{posX+width,posY,0},{r,g,b,1}};
+    Vertex ul={{posX,posY,0},{r,g,b,1}};
+    Vertex ll={{posX,posY-width,0},{r,g,b,1}};
+    Vertex rectVertex[]={ur,ul,ll};
+    GLProgram *program=[[GLProgram alloc] initWithVertexShaderString:kRectVertShader fragmentShaderString:kRectFragShader];
+    [program addAttribute:@"position"];
+    [program addAttribute:@"SourceColor"];
+    [self linkProgram:program];
+    GLint positionAttrib=[program attributeIndex:@"position"];
+    GLint sourceColorAttrib=[program attributeIndex:@"SourceColor"];
+    [GPUImageContext setActiveShaderProgram:program];
+    glEnableVertexAttribArray(positionAttrib);
+    glEnableVertexAttribArray(sourceColorAttrib);
+    
+    GLuint vertexBuffer;
+    glGenBuffers(1, &vertexBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(rectVertex), rectVertex, GL_STATIC_DRAW);
+    
+    GLuint indexBuffer;
+    glGenBuffers(1, &indexBuffer);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices), Indices, GL_STATIC_DRAW);
+    
+    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glClear(GL_COLOR_BUFFER_BIT);
+    
+    //    glViewport(0, 0, 128, 128);
+    glVertexAttribPointer(positionAttrib, 3, GL_FLOAT, GL_FALSE,
+                          sizeof(Vertex), 0);
+    glVertexAttribPointer(sourceColorAttrib, 4, GL_FLOAT, GL_FALSE,
+                          sizeof(Vertex), (GLvoid*) (sizeof(float) * 3));
+    
+    glDrawElements(GL_TRIANGLES, sizeof(Indices)/sizeof(Indices[0]),
+                   GL_UNSIGNED_BYTE, 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
 + (void)drawRandomRect
 {
     CGFloat width=randomNumberRange(20, 30)*0.01; // 0.2 ~ 0.3
@@ -104,9 +155,9 @@ static int randomNumberRange(int from, int to)
     CGFloat r,g,b;
     [ramdomColor getRed:&r green:&g blue:&b alpha:nil];
     
-    width=0.3;
-    posX=0-width/2.0;
-    posY=width/2.0;
+//    width=0.3;
+//    posX=0-width/2.0;
+//    posY=width/2.0;
     
     Vertex lr={{posX+width,posY-width,0},{r,g,b,1}};
     Vertex ur={{posX+width,posY,0},{r,g,b,1}};

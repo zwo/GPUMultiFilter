@@ -61,6 +61,8 @@
 @property (strong, nonatomic) FZGetXYZFilter *getXYZFilter;
 @property (strong, nonatomic) FZGetZFilter *getZFilter;
 
+@property (strong, nonatomic) FZPlayFilter *playFilter;
+
 @property (strong, nonatomic) FZFramebuffer *fboDebugDisplay;
 @property (strong, nonatomic) FZXYZ4OutputDebugFilter *debugOutputFilter;
 @property (assign) NSInteger debugCounter;
@@ -164,6 +166,8 @@ void restoreToSystemDefaults(FZUniformInfos *infos)
     self.getXYZFilter=[[FZGetXYZFilter alloc] init];
     self.getZFilter=[[FZGetZFilter alloc] init];
     
+    self.playFilter=[[FZPlayFilter alloc] init];
+    
     self.fboDepositionBuffer=[[FZFramebuffer alloc] initWithSize:size];
     self.fboDisorder=[[FZFramebuffer alloc] initWithSize:size];
     
@@ -265,7 +269,7 @@ void restoreToSystemDefaults(FZUniformInfos *infos)
         [self.sinkInkPP swap];
         
         self.inkXToFilter.renderFramebuffer=[self.fixInkPP getNewFbo].outputFramebuffer;
-        [self.inkXToFilter setFixInkMapFramebuffer:self.fixInkPP.getOldFbo.outputFramebuffer sinkInkMapFramebuffer:self.sinkInkPP.getOldFbo.outputFramebuffer velDenFramebuffer:self.velDenPP.getOldFbo.outputFramebuffer];
+        [self.inkXToFilter setFixInkMapFramebuffer:self.fixInkPP.getOldFbo.outputFramebuffer sinkInkMapFramebuffer:self.sinkInkPP.getOldFbo.outputFramebuffer velDenFramebuffer:self.flowInkPP.getOldFbo.outputFramebuffer];
         [self.inkXToFilter newFrameReadyAtTime:kCMTimeIndefinite atIndex:0];
         [self.fixInkPP swap];
         
@@ -289,15 +293,25 @@ void restoreToSystemDefaults(FZUniformInfos *infos)
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         
-        self.debugOutputFilter.renderFramebuffer=self.fboDebugDisplay.outputFramebuffer;
-        [self.debugOutputFilter begin];
-        [self.debugOutputFilter renderFramebuffer:self.fboDepositionBuffer.outputFramebuffer toGuadrant:1];
-        [self.debugOutputFilter renderFramebuffer:[self.surfInkPP getOldFbo].outputFramebuffer toGuadrant:2];
-        [self.debugOutputFilter renderFramebuffer:[self.flowInkPP getOldFbo].outputFramebuffer toGuadrant:3];
-        [self.debugOutputFilter renderFramebuffer:[self.fixInkPP getOldFbo].outputFramebuffer toGuadrant:4];
-        [self.debugOutputFilter end];
+//        self.debugOutputFilter.renderFramebuffer=self.fboDebugDisplay.outputFramebuffer;
+//        [self.debugOutputFilter begin];
+//        [self.debugOutputFilter renderFramebuffer:[self.miscPP getOldFbo].outputFramebuffer toGuadrant:1];
+//        [self.debugOutputFilter renderFramebuffer:[self.surfInkPP getOldFbo].outputFramebuffer toGuadrant:2];
+//        [self.debugOutputFilter renderFramebuffer:[self.fixInkPP getOldFbo].outputFramebuffer toGuadrant:3];
+//        [self.debugOutputFilter renderFramebuffer:self.fboDepositionBuffer.outputFramebuffer toGuadrant:4];
+//        [self.debugOutputFilter end];
+//        
+//        [self.fboDebugDisplay feedFramebufferToFilter:self.renderView];
         
-        [self.fboDebugDisplay feedFramebufferToFilter:self.renderView];
+       
+        FZFramebuffer *fbo=self.dist1PP.getOldFbo;
+        [self.playFilter addTarget:self.renderView];
+        self.playFilter.pos=0;
+        [fbo feedFramebufferToFilter:self.playFilter];
+        
+//        FZFramebuffer *inkFixFbo=self.fixInkPP.getOldFbo;
+//        [self.getXYZFilter addTarget:self.renderView];
+//        [inkFixFbo feedFramebufferToFilter:self.getXYZFilter];
         
     });
 }
@@ -333,8 +347,8 @@ void restoreToSystemDefaults(FZUniformInfos *infos)
     [self.miscPP swap];
     
 //    FZPlayFilter *playFilter=[FZPlayFilter new];
-//    playFilter.renderFramebuffer=[self.surfInkPP getNewFbo].outputFramebuffer;
-//    playFilter.pos=0.7;
+//    playFilter.renderFramebuffer=[self.dist1PP getNewFbo].outputFramebuffer;
+//    playFilter.pos=0;
 //    [playFilter setWaterSurfaceFramebuffer:self.fboDepositionBuffer.outputFramebuffer];
 //    [playFilter newFrameReadyAtTime:kCMTimeIndefinite atIndex:0];
     

@@ -40,7 +40,7 @@
     runOnMainQueueWithoutDeadlocking(^{
         if (self.displayLink == nil) {
             self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(drawFrame)];
-            self.displayLink.frameInterval=30;
+            self.displayLink.frameInterval=10;
             [self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
         }
     });
@@ -67,7 +67,7 @@
         [TestDraw drawRandomRect];
 //        [fboDepositionBuffer endDrawing];
         [self.inkSim beginDebug];
-        [self.inkSim draw];
+//        [self.inkSim draw];
     }];
 }
 
