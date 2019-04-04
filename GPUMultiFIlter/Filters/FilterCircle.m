@@ -22,7 +22,8 @@ static NSString *const kCircleFilterFragmentShaderString = SHADER_STRING
      float aperture = 0.5;
      vec4 foreColor = vec4(0.5,0.5,0.5,1);
      vec2 uv=textureCoordinate;
-     vec2 xy = 2.0 * textureCoordinate - 1.0;
+//     vec2 xy = 2.0 * textureCoordinate - 1.0;
+     vec2 xy = (2.*textureCoordinate*iResolution-iResolution.xy)/min(iResolution.x,iResolution.y);//将屏幕空间映射至[-1.xx,1.xx]x[-1,1]（width大于height） 变为圆形
      float d = length(xy);
      vec4 color = texture2D(inputImageTexture, uv);
      if (d < aperture) {
